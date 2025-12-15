@@ -1,35 +1,11 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import creamCheesePouch from "@/assets/cream-cheese-pouch.png";
-import premiumTins from "@/assets/premium-tins.png";
-import himalayanSaltTin from "@/assets/himalayan-salt-tin.png";
-
-const products = [
-  {
-    id: 1,
-    name: "Cream Cheese & Onion",
-    category: "Classic Collection",
-    image: creamCheesePouch,
-    price: "₹299",
-  },
-  {
-    id: 2,
-    name: "Premium Tin Collection",
-    category: "Gift Range",
-    image: premiumTins,
-    price: "₹599",
-  },
-  {
-    id: 3,
-    name: "Himalayan Salt & Pepper",
-    category: "Signature Series",
-    image: himalayanSaltTin,
-    price: "₹549",
-  },
-];
+import { getFeaturedProducts } from "@/data/products";
 
 const FeaturedProducts = () => {
+  const featuredProducts = getFeaturedProducts();
+
   return (
     <section className="section-padding bg-background">
       <div className="container-luxury">
@@ -52,7 +28,7 @@ const FeaturedProducts = () => {
 
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product, index) => (
+          {featuredProducts.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 30 }}
@@ -61,30 +37,32 @@ const FeaturedProducts = () => {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="group"
             >
-              <div className="card-luxury p-6">
-                {/* Image */}
-                <div className="relative aspect-square mb-6 overflow-hidden bg-muted rounded-lg">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
+              <Link to={`/products/${product.id}`} className="block">
+                <div className="card-luxury p-6">
+                  {/* Image */}
+                  <div className="relative aspect-square mb-6 overflow-hidden bg-muted rounded-lg">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
 
-                {/* Content */}
-                <div className="text-center">
-                  <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
-                    {product.category}
-                  </p>
-                  <h3 className="font-heading text-xl mb-2">{product.name}</h3>
-                  <p className="text-primary font-medium text-lg mb-4">
-                    {product.price}
-                  </p>
-                  <Button variant="outline" className="w-full" asChild>
-                    <Link to="/products">View Product</Link>
-                  </Button>
+                  {/* Content */}
+                  <div className="text-center">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                      {product.category}
+                    </p>
+                    <h3 className="font-heading text-xl mb-2">{product.name}</h3>
+                    <p className="text-primary font-medium text-lg mb-4">
+                      {product.price}
+                    </p>
+                    <Button variant="outline" className="w-full">
+                      View Product
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>

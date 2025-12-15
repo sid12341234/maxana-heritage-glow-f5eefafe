@@ -6,112 +6,117 @@
 
 @layer base {
   :root {
-    /* Maxana Luxury Color Palette */
-    --background: 48 50% 98%;
-    --foreground: 0 0% 10%;
+    /* Maxana Royal Cream & Brown Palette */
+    --background: 35 35% 96%;
+    --foreground: 25 30% 12%;
 
-    --card: 48 50% 98%;
-    --card-foreground: 0 0% 10%;
+    --card: 35 40% 97%;
+    --card-foreground: 25 30% 12%;
 
-    --popover: 48 50% 98%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 35 40% 97%;
+    --popover-foreground: 25 30% 12%;
 
-    /* Forest Green - Primary */
-    --primary: 145 32% 30%;
-    --primary-foreground: 48 50% 98%;
+    /* Rich Brown - Primary */
+    --primary: 25 45% 25%;
+    --primary-foreground: 35 40% 97%;
 
-    /* Soft Sage - Secondary */
-    --secondary: 120 15% 92%;
-    --secondary-foreground: 0 0% 10%;
+    /* Warm Cream - Secondary */
+    --secondary: 35 30% 92%;
+    --secondary-foreground: 25 30% 12%;
 
-    /* Muted Ivory */
-    --muted: 48 30% 94%;
-    --muted-foreground: 0 0% 40%;
+    /* Muted Cream */
+    --muted: 35 25% 93%;
+    --muted-foreground: 25 15% 45%;
 
-    /* Gold Accent */
-    --accent: 38 55% 55%;
-    --accent-foreground: 0 0% 10%;
+    /* Antique Gold Accent */
+    --accent: 38 60% 50%;
+    --accent-foreground: 25 30% 12%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 48 50% 98%;
+    --destructive-foreground: 35 40% 97%;
 
-    --border: 38 25% 85%;
-    --input: 38 25% 85%;
-    --ring: 145 32% 30%;
+    --border: 30 25% 82%;
+    --input: 30 25% 82%;
+    --ring: 25 45% 25%;
 
     --radius: 0.5rem;
 
     /* Custom Maxana Tokens */
-    --ivory: 48 50% 98%;
-    --ivory-dark: 48 30% 94%;
-    --forest: 145 32% 30%;
-    --forest-light: 145 25% 45%;
-    --gold: 38 55% 55%;
-    --gold-light: 38 60% 70%;
-    --charcoal: 0 0% 10%;
-    --sage: 120 15% 92%;
+    --ivory: 35 35% 96%;
+    --ivory-dark: 35 30% 90%;
+    --cream: 35 40% 97%;
+    --cream-dark: 30 30% 88%;
+    --brown: 25 45% 25%;
+    --brown-light: 25 35% 40%;
+    --gold: 38 60% 50%;
+    --gold-light: 38 55% 65%;
+    --charcoal: 25 30% 12%;
+    --warm: 30 25% 92%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--ivory)) 0%, hsl(var(--ivory-dark)) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--cream)) 0%, hsl(var(--cream-dark)) 100%);
     --gradient-gold: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
-    --gradient-overlay: linear-gradient(180deg, rgba(255, 253, 245, 0.9) 0%, rgba(255, 253, 245, 0.7) 100%);
+    --gradient-overlay: linear-gradient(180deg, rgba(250, 245, 238, 0.95) 0%, rgba(250, 245, 238, 0.8) 100%);
+    --gradient-royal: linear-gradient(135deg, hsl(var(--brown)) 0%, hsl(var(--brown-light)) 100%);
 
     /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(var(--charcoal) / 0.08);
-    --shadow-elegant: 0 8px 40px -8px hsl(var(--charcoal) / 0.12);
-    --shadow-gold: 0 4px 20px -4px hsl(var(--gold) / 0.25);
+    --shadow-soft: 0 4px 20px -4px hsl(var(--charcoal) / 0.1);
+    --shadow-elegant: 0 8px 40px -8px hsl(var(--charcoal) / 0.15);
+    --shadow-gold: 0 4px 20px -4px hsl(var(--gold) / 0.3);
 
     /* Transitions */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    --sidebar-background: 48 50% 98%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 145 32% 30%;
-    --sidebar-primary-foreground: 48 50% 98%;
-    --sidebar-accent: 120 15% 92%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 38 25% 85%;
-    --sidebar-ring: 145 32% 30%;
+    --sidebar-background: 35 35% 96%;
+    --sidebar-foreground: 25 30% 12%;
+    --sidebar-primary: 25 45% 25%;
+    --sidebar-primary-foreground: 35 40% 97%;
+    --sidebar-accent: 35 30% 92%;
+    --sidebar-accent-foreground: 25 30% 12%;
+    --sidebar-border: 30 25% 82%;
+    --sidebar-ring: 25 45% 25%;
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 48 50% 98%;
+    --background: 20 20% 8%;
+    --foreground: 35 35% 96%;
 
-    --card: 0 0% 12%;
-    --card-foreground: 48 50% 98%;
+    --card: 20 15% 12%;
+    --card-foreground: 35 35% 96%;
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 48 50% 98%;
+    --popover: 20 15% 12%;
+    --popover-foreground: 35 35% 96%;
 
-    --primary: 145 32% 50%;
-    --primary-foreground: 0 0% 8%;
+    --primary: 38 60% 55%;
+    --primary-foreground: 20 20% 8%;
 
-    --secondary: 0 0% 18%;
-    --secondary-foreground: 48 50% 98%;
+    --secondary: 20 15% 18%;
+    --secondary-foreground: 35 35% 96%;
 
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 20 15% 18%;
+    --muted-foreground: 35 20% 60%;
 
-    --accent: 38 55% 55%;
-    --accent-foreground: 0 0% 8%;
+    --accent: 38 60% 55%;
+    --accent-foreground: 20 20% 8%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 48 50% 98%;
+    --destructive-foreground: 35 35% 96%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 145 32% 50%;
+    --border: 20 15% 22%;
+    --input: 20 15% 22%;
+    --ring: 38 60% 55%;
 
-    --ivory: 0 0% 8%;
-    --ivory-dark: 0 0% 12%;
-    --forest: 145 32% 50%;
-    --forest-light: 145 25% 60%;
-    --gold: 38 55% 55%;
-    --gold-light: 38 60% 70%;
-    --charcoal: 48 50% 98%;
-    --sage: 0 0% 18%;
+    --ivory: 20 20% 8%;
+    --ivory-dark: 20 15% 12%;
+    --cream: 20 15% 12%;
+    --cream-dark: 20 15% 15%;
+    --brown: 38 60% 55%;
+    --brown-light: 38 50% 65%;
+    --gold: 38 60% 55%;
+    --gold-light: 38 55% 70%;
+    --charcoal: 35 35% 96%;
+    --warm: 20 15% 18%;
   }
 }
 

@@ -66,16 +66,20 @@ export default {
           DEFAULT: "hsl(var(--ivory))",
           dark: "hsl(var(--ivory-dark))",
         },
-        forest: {
-          DEFAULT: "hsl(var(--forest))",
-          light: "hsl(var(--forest-light))",
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          dark: "hsl(var(--cream-dark))",
+        },
+        brown: {
+          DEFAULT: "hsl(var(--brown))",
+          light: "hsl(var(--brown-light))",
         },
         gold: {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
         },
         charcoal: "hsl(var(--charcoal))",
-        sage: "hsl(var(--sage))",
+        warm: "hsl(var(--warm))",
       },
       borderRadius: {
         lg: "var(--radius)",
