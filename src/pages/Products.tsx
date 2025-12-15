@@ -1,56 +1,19 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import creamCheesePouch from "@/assets/cream-cheese-pouch.png";
-import premiumTins from "@/assets/premium-tins.png";
-import himalayanSaltTin from "@/assets/himalayan-salt-tin.png";
-import productsLineup from "@/assets/products-lineup.png";
+import { products } from "@/data/products";
 
-const products = [
-  {
-    id: 1,
-    name: "Cream Cheese & Onion",
-    category: "Classic Pouch",
-    image: creamCheesePouch,
-    price: "₹299",
-    weight: "100g",
-    description:
-      "A creamy, savory delight with the perfect balance of cheese and onion flavors.",
-  },
-  {
-    id: 2,
-    name: "Himalayan Salt & Cracked Pepper",
-    category: "Signature Tin",
-    image: himalayanSaltTin,
-    price: "₹549",
-    weight: "150g",
-    description:
-      "Pure Himalayan salt meets freshly cracked pepper in this sophisticated snack.",
-  },
-  {
-    id: 3,
-    name: "Premium Tin Collection",
-    category: "Gift Set",
-    image: premiumTins,
-    price: "₹1,499",
-    weight: "3 × 150g",
-    description:
-      "An exquisite collection featuring our three signature flavors in premium tins.",
-  },
-  {
-    id: 4,
-    name: "Family Pack Assorted",
-    category: "Value Pack",
-    image: productsLineup,
-    price: "₹999",
-    weight: "4 × 100g",
-    description:
-      "Explore our range with four different flavors in convenient pouch packaging.",
-  },
-];
+const categories = ["All", "Classic Collection", "Signature Series", "Spice Collection", "Luxury Edition", "Asian Fusion", "Gift Set", "Value Pack"];
 
 const Products = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredProducts = selectedCategory === "All" 
+    ? products 
+    : products.filter(product => product.category === selectedCategory);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -77,11 +40,32 @@ const Products = () => {
         </div>
       </section>
 
+      {/* Category Filter */}
+      <section className="py-8 bg-background border-b border-border">
+        <div className="container-luxury">
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 text-sm rounded-full transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted hover:bg-secondary text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Products Grid */}
       <section className="section-padding bg-background">
         <div className="container-luxury">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {products.map((product, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -90,8 +74,8 @@ const Products = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="card-luxury overflow-hidden">
-                  <div className="grid md:grid-cols-2">
+                <Link to={`/products/${product.id}`} className="block">
+                  <div className="card-luxury overflow-hidden">
                     {/* Image */}
                     <div className="relative aspect-square bg-muted overflow-hidden">
                       <img
@@ -99,33 +83,36 @@ const Products = () => {
                         alt={product.name}
                         className="w-full h-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
                     </div>
 
                     {/* Content */}
-                    <div className="p-6 flex flex-col justify-center">
+                    <div className="p-6">
                       <p className="text-xs uppercase tracking-widest text-gold mb-2">
                         {product.category}
                       </p>
-                      <h3 className="font-heading text-2xl mb-2">
+                      <h3 className="font-heading text-xl mb-2">
                         {product.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground mb-4">
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                         {product.description}
                       </p>
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="text-2xl font-heading text-primary">
-                          {product.price}
-                        </span>
-                        <span className="text-sm text-muted-foreground">
-                          {product.weight}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-xl font-heading text-primary">
+                            {product.price}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {product.weight}
+                          </span>
+                        </div>
+                        <span className="text-sm text-gold group-hover:translate-x-1 transition-transform duration-300">
+                          View →
                         </span>
                       </div>
-                      <Button variant="luxury" className="w-full">
-                        Add to Cart
-                      </Button>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
