@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -34,30 +34,30 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-soft py-3"
+          ? "bg-background/98 backdrop-blur-xl shadow-elegant py-4"
           : "bg-transparent py-6"
       )}
     >
       <nav className="container-luxury flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
-          <span className="font-heading text-2xl md:text-3xl font-medium tracking-wide text-foreground">
+        <Link to="/" className="flex items-center gap-3 group">
+          <span className="font-heading text-2xl md:text-3xl font-semibold tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-300">
             MAXANA
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
               className={cn(
-                "text-sm tracking-wide uppercase transition-colors duration-300 link-underline",
+                "text-sm tracking-[0.15em] uppercase transition-all duration-300 link-underline font-medium",
                 location.pathname === link.path
-                  ? "text-primary font-medium"
+                  ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
               )}
             >
@@ -67,7 +67,10 @@ const Header = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex items-center gap-4">
+          <Button variant="ghost" size="icon" className="rounded-full">
+            <ShoppingBag className="w-5 h-5" />
+          </Button>
           <Button variant="luxury" size="sm" asChild>
             <Link to="/products">Shop Now</Link>
           </Button>
@@ -76,7 +79,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="lg:hidden p-2 text-foreground"
+          className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,25 +93,25 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-background border-t border-border"
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:hidden bg-background border-t border-border/50"
           >
-            <div className="container-luxury py-6 flex flex-col gap-4">
+            <div className="container-luxury py-8 flex flex-col gap-5">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    "text-base tracking-wide uppercase py-2 transition-colors",
+                    "text-base tracking-[0.15em] uppercase py-2 transition-colors font-medium",
                     location.pathname === link.path
-                      ? "text-primary font-medium"
+                      ? "text-primary"
                       : "text-muted-foreground"
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Button variant="luxury" className="mt-4" asChild>
+              <Button variant="luxury" className="mt-6" asChild>
                 <Link to="/products">Shop Now</Link>
               </Button>
             </div>
