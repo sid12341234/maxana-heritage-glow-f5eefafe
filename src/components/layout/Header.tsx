@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { name: "Home", path: "/" },
+  { name: "Home", path: "/home" },
   { name: "About", path: "/about" },
   { name: "Products", path: "/products" },
   { name: "Why Makhana", path: "/why-makhana" },
@@ -42,7 +42,7 @@ const Header = () => {
     >
       <nav className="container-luxury flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
+        <Link to="/home" className="flex items-center gap-3 group">
           <span className="font-heading text-2xl md:text-3xl font-semibold tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-300">
             MAXANA
           </span>
