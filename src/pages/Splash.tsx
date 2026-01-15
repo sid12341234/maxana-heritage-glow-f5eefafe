@@ -16,9 +16,9 @@ const Splash = () => {
   return (
     <AnimatePresence>
       {!isExiting ? (
-        <motion.div
-          className="fixed inset-0 bg-background flex flex-col items-center justify-center cursor-pointer overflow-hidden lv-pattern"
-          onClick={handleEnter}
+          <motion.div
+            className="fixed inset-0 bg-gradient-to-b from-background via-background to-muted/20 flex flex-col items-center justify-center cursor-pointer overflow-hidden lv-pattern"
+            onClick={handleEnter}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -88,12 +88,22 @@ const Splash = () => {
 
             {/* Slogan */}
             <motion.p
-              className="font-heading text-xl md:text-2xl lg:text-3xl text-muted-foreground italic tracking-wide mb-12"
+              className="font-heading text-xl md:text-2xl lg:text-3xl text-foreground/70 italic tracking-wide mb-5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.1 }}
             >
               The Art of Refined Indulgence
+            </motion.p>
+
+            {/* Instruction */}
+            <motion.p
+              className="text-xs md:text-sm tracking-[0.35em] uppercase text-foreground/70 mb-7"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.25 }}
+            >
+              Click anywhere to enter
             </motion.p>
 
             {/* Enter CTA */}
@@ -103,15 +113,16 @@ const Splash = () => {
               transition={{ duration: 1, delay: 1.5 }}
               className="flex flex-col items-center gap-6"
             >
-              <motion.div
-                className="px-8 py-3 border border-primary/30 rounded-full"
-                whileHover={{ scale: 1.05, borderColor: "hsl(40 70% 45%)" }}
-                transition={{ duration: 0.3 }}
+              <motion.button
+                type="button"
+                onClick={handleEnter}
+                className="px-10 py-3 rounded-full bg-primary text-primary-foreground shadow-elegant"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.25 }}
               >
-                <span className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-medium">
-                  Enter
-                </span>
-              </motion.div>
+                <span className="text-sm tracking-[0.35em] uppercase font-medium">Enter</span>
+              </motion.button>
 
               {/* Animated scroll indicator */}
               <motion.div
