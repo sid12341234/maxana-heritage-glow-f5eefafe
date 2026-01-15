@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBackground from "@/assets/hero-background.jpg";
-import productsLineup from "@/assets/products-lineup.png";
+
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
@@ -22,13 +22,13 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="container-luxury relative z-10 pt-28">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="flex justify-center items-center">
           {/* Text Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center lg:text-left"
+            className="text-center max-w-3xl"
           >
             {/* Luxury Badge */}
             <div className="inline-flex items-center gap-2 luxury-badge mb-6">
@@ -42,12 +42,12 @@ const HeroSection = () => {
               <span className="block">Indulgence</span>
             </h1>
             
-            <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto lg:mx-0 mb-10 leading-relaxed">
+            <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
               Handcrafted from the pristine waters of Mithila, our premium makhana 
               embodies centuries of tradition, reimagined for the modern connoisseur.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
               <Button variant="hero" size="lg" asChild>
                 <Link to="/products">
                   <span>Explore Collection</span>
@@ -60,33 +60,13 @@ const HeroSection = () => {
             </div>
 
             {/* Trust Badges - Luxury Style */}
-            <div className="flex flex-wrap gap-8 mt-14 justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-8 mt-14 justify-center">
               {["100% Natural", "Superfood", "Handcrafted"].map((badge) => (
                 <span key={badge} className="flex items-center gap-3 text-sm text-muted-foreground">
                   <span className="w-2 h-2 bg-gradient-to-r from-gold to-gold-light rounded-full shadow-gold" />
                   {badge}
                 </span>
               ))}
-            </div>
-          </motion.div>
-
-          {/* Product Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden lg:block relative"
-          >
-            {/* Decorative elements */}
-            <div className="absolute -top-10 -right-10 w-72 h-72 bg-gold/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-            
-            <div className="relative">
-              <img
-                src={productsLineup}
-                alt="Maxana premium makhana product range"
-                className="w-full max-w-xl mx-auto animate-float drop-shadow-2xl"
-              />
             </div>
           </motion.div>
         </div>
