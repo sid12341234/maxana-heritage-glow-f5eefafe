@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 
 const Splash = () => {
   const [isExiting, setIsExiting] = useState(false);
@@ -10,11 +11,11 @@ const Splash = () => {
     setIsExiting(true);
     setTimeout(() => {
       navigate("/home");
-    }, 1200);
+    }, 1500);
   };
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {!isExiting ? (
         <motion.div
           className="fixed inset-0 bg-background flex flex-col items-center justify-center cursor-pointer overflow-hidden lv-pattern"
@@ -24,6 +25,29 @@ const Splash = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
         >
+          {/* Animated Particles */}
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-gold/30 rounded-full"
+              initial={{
+                x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : 0,
+                y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : 0,
+                scale: 0,
+              }}
+              animate={{
+                y: typeof window !== 'undefined' ? [null, Math.random() * window.innerHeight] : 0,
+                scale: [0, 1, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+
           {/* Decorative Elements */}
           <motion.div
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl"
@@ -166,20 +190,61 @@ const Splash = () => {
         </motion.div>
       ) : (
         <motion.div
-          className="fixed inset-0 bg-background flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 flex items-center justify-center overflow-hidden"
           initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          exit={{ opacity: 0 }}
         >
-          {/* Exit Animation - Logo scales up and fades */}
-          <motion.h1
-            className="font-heading text-6xl md:text-8xl lg:text-9xl font-medium tracking-[0.2em] text-foreground"
+          {/* Luxury Curtain Reveal Effect */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-primary via-gold to-primary z-20"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+            style={{ originY: 0 }}
+          />
+          <motion.div
+            className="absolute inset-0 bg-background z-30"
+            initial={{ scaleY: 0 }}
+            animate={{ scaleY: 1 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.76, 0, 0.24, 1] }}
+            style={{ originY: 0 }}
+          />
+
+          {/* Sparkle burst effect */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute z-40"
+              style={{ left: '50%', top: '50%' }}
+              initial={{ scale: 0, x: 0, y: 0 }}
+              animate={{
+                scale: [0, 1.5, 0],
+                x: `${Math.cos((i * Math.PI * 2) / 12) * 300}px`,
+                y: `${Math.sin((i * Math.PI * 2) / 12) * 300}px`,
+              }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            >
+              <Sparkles className="text-gold w-6 h-6" />
+            </motion.div>
+          ))}
+
+          {/* Exit Animation - Logo with shimmer */}
+          <motion.div
+            className="relative z-50 overflow-hidden"
             initial={{ scale: 1, opacity: 1 }}
-            animate={{ scale: 1.5, opacity: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           >
-            MAXANA
-          </motion.h1>
+            <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl font-medium tracking-[0.2em] text-foreground relative">
+              MAXANA
+            </h1>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/60 to-transparent"
+              initial={{ x: "-100%" }}
+              animate={{ x: "200%" }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+            />
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

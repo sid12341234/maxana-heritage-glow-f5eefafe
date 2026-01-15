@@ -1,14 +1,19 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Check, ShoppingBag, Heart, Sparkles, ArrowRight } from "lucide-react";
+import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { getProductById, products } from "@/data/products";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = getProductById(id || "");
+  const { addToCart, setIsCartOpen } = useCart();
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   if (!product) {
     return (
@@ -108,9 +113,39 @@ const ProductDetail = () => {
 
               {/* CTAs */}
               <div className="flex gap-4">
-                <Button variant="luxury" size="lg" className="flex-1">
+                <Button
+                  variant="luxury"
+                  size="lg"
+                  className="flex-1"
+                  disabled={isAddingToCart}
+                  onClick={async () => {
+                    setIsAddingToCart(true);
+                    try {
+                      await addToCart({
+                        product_id: product.id,
+                        product_name: product.name,
+                        product_price: product.price,
+                        product_image: product.image,
+                        product_weight: product.weight,
+                      });
+                      toast.success("Added to cart!", {
+                        description: `${product.name} has been added to your cart.`,
+                        action: {
+                          label: "View Cart",
+                          onClick: () => setIsCartOpen(true),
+                        },
+                      });
+                    } catch (error) {
+                      toast.error("Failed to add to cart", {
+                        description: "Please try again.",
+                      });
+                    } finally {
+                      setIsAddingToCart(false);
+                    }
+                  }}
+                >
                   <ShoppingBag className="w-5 h-5 mr-3" />
-                  Add to Cart
+                  {isAddingToCart ? "Adding..." : "Add to Cart"}
                 </Button>
                 <Button variant="outline" size="lg" className="rounded-2xl border-border">
                   <Heart className="w-5 h-5" />
