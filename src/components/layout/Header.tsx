@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navLinks = [
   { name: "Home", path: "/home" },
@@ -19,7 +26,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { itemCount, setIsCartOpen } = useCart();
+  const { user, signOut, isLoading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +41,11 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/home");
+  };
 
   return (
     <header
@@ -87,6 +101,32 @@ const Header = () => {
               </motion.span>
             )}
           </Button>
+
+          {!isLoading && (
+            user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <User className="w-5 h-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem className="text-muted-foreground text-sm">
+                    {user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button variant="outline" size="sm" asChild className="rounded-full">
+                <Link to="/auth">Sign In</Link>
+              </Button>
+            )
+          )}
+
           <Button variant="luxury" size="sm" asChild>
             <Link to="/products">Shop Now</Link>
           </Button>
@@ -146,6 +186,26 @@ const Header = () => {
                   {link.name}
                 </Link>
               ))}
+              
+              {!isLoading && (
+                user ? (
+                  <button
+                    onClick={handleSignOut}
+                    className="text-base tracking-[0.15em] uppercase py-2 transition-colors font-medium text-muted-foreground text-left flex items-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </button>
+                ) : (
+                  <Link
+                    to="/auth"
+                    className="text-base tracking-[0.15em] uppercase py-2 transition-colors font-medium text-muted-foreground"
+                  >
+                    Sign In
+                  </Link>
+                )
+              )}
+              
               <Button variant="luxury" className="mt-6" asChild>
                 <Link to="/products">Shop Now</Link>
               </Button>
