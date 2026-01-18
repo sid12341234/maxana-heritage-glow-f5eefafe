@@ -15,6 +15,7 @@ import WhyMakhana from "./pages/WhyMakhana";
 import Export from "./pages/Export";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
+import Checkout from "./pages/Checkout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="/export" element={<Export />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </CartProvider>
