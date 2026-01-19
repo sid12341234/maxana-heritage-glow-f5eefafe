@@ -1,37 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
-import { getCategories, getProducts, type Product, type ProductCategory } from "@/services/products";
+import { products, type Product } from "@/data/products";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [categories, setCategories] = useState<ProductCategory[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const [categoryData, productData] = await Promise.all([
-        getCategories(),
-        getProducts()
-      ]);
-      setCategories(categoryData);
-      setProducts(productData);
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
+  // Extract unique categories from products
+  const categories = [...new Set(products.map(p => p.category))];
 
   const filteredProducts = selectedCategory === "all"
     ? products
-    : products.filter(product => {
-        const category = categories.find(c => c.id === product.category_id);
-        return category?.slug === selectedCategory;
-      });
+    : products.filter(product => product.category === selectedCategory);
 
   return (
     <Layout>
@@ -76,15 +59,15 @@ const Products = () => {
             </button>
             {categories.map((category) => (
               <button
-                key={category.slug}
-                onClick={() => setSelectedCategory(category.slug)}
+                key={category}
+                onClick={() => setSelectedCategory(category)}
                 className={`px-5 py-2.5 text-sm rounded-full transition-all duration-500 font-medium tracking-wide ${
-                  selectedCategory === category.slug
+                  selectedCategory === category
                     ? "bg-primary text-primary-foreground shadow-elegant"
                     : "bg-card hover:bg-secondary text-muted-foreground hover:text-foreground border border-border/50"
                 }`}
               >
-                {category.name}
+                {category}
               </button>
             ))}
           </div>
@@ -94,14 +77,7 @@ const Products = () => {
       {/* Products Grid */}
       <section className="section-padding bg-background">
         <div className="container-luxury">
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <div className="text-center">
-                <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
-                <p className="text-muted-foreground">Loading products...</p>
-              </div>
-            </div>
-          ) : filteredProducts.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-muted-foreground text-lg">No products found in this category.</p>
             </div>
@@ -118,21 +94,23 @@ const Products = () => {
                 >
                   <Link to={`/products/${product.id}`} className="block">
                     <div className="card-luxury overflow-hidden relative">
-                      {/* Stock Badge */}
-                      <div className="absolute top-4 right-4 z-10">
-                        <span className={`px-3 py-1 text-xs font-medium rounded-full ${
-                          product.stock_status === 'in_stock'
-                            ? 'bg-green-50 text-green-700 border border-green-200'
-                            : 'bg-red-50 text-red-700 border border-red-200'
-                        }`}>
-                          {product.stock_status === 'in_stock' ? 'In Stock' : 'Out of Stock'}
-                        </span>
-                      </div>
+                      {/* Featured Badge */}
+                      {product.featured && (
+                        <div className="absolute top-4 right-4 z-10">
+                          <span className="px-3 py-1 text-xs font-medium rounded-full bg-gold/10 text-gold border border-gold/30">
+                            Featured
+                          </span>
+                        </div>
+                      )}
 
                       {/* Image */}
                       <div className="relative aspect-square product-image rounded-t-3xl bg-white">
                         <div className="w-full h-full flex items-center justify-center p-8">
-                          <span className="text-sm text-muted-foreground">Product Image</span>
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110"
+                          />
                         </div>
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
                       </div>
@@ -140,7 +118,7 @@ const Products = () => {
                       {/* Content */}
                       <div className="p-8">
                         <p className="luxury-badge mb-4 inline-block">
-                          {categories.find(c => c.id === product.category_id)?.name}
+                          {product.category}
                         </p>
                         <h3 className="font-heading text-2xl mb-3 font-medium">
                           {product.name}
@@ -148,18 +126,13 @@ const Products = () => {
                         <p className="text-sm text-muted-foreground mb-5 line-clamp-2 leading-relaxed">
                           {product.description}
                         </p>
-                        {product.specification && (
-                          <p className="text-xs text-muted-foreground mb-3">
-                            Size: {product.specification}
-                          </p>
-                        )}
                         <div className="flex items-center justify-between">
                           <div className="flex items-baseline gap-2">
                             <span className="text-2xl font-heading text-primary">
-                              ₹{product.price.toLocaleString('en-IN')}
+                              {product.price}
                             </span>
                             <span className="text-xs text-muted-foreground">
-                              {product.size}
+                              {product.weight}
                             </span>
                           </div>
                           <span className="flex items-center gap-1 text-sm text-muted-foreground group-hover:text-gold transition-all duration-500">
