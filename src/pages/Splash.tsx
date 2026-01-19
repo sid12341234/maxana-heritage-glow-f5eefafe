@@ -20,10 +20,10 @@ const Splash = () => {
         <motion.div
           className="fixed inset-0 bg-background flex flex-col items-center justify-center cursor-pointer overflow-hidden lv-pattern"
           onClick={handleEnter}
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
           {/* Animated Particles */}
           {[...Array(20)].map((_, i) => (
