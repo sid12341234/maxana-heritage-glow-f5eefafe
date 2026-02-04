@@ -114,6 +114,10 @@ const Header = () => {
                   <DropdownMenuItem className="text-muted-foreground text-sm">
                     {user.email}
                   </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("/profile")} className="cursor-pointer">
+                    <User className="w-4 h-4 mr-2" />
+                    Profile
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer">
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
