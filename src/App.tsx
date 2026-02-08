@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ScrollToTop from "@/components/ScrollToTop";
 import Splash from "./pages/Splash";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -24,6 +25,7 @@ const App = () => (
     <TooltipProvider>
       <BrowserRouter>
         <CartProvider>
+          <ScrollToTop />
           <Toaster />
           <Sonner />
           <CartDrawer />
