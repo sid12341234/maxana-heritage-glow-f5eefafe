@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import CartDrawer from "@/components/cart/CartDrawer";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Splash from "./pages/Splash";
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -13,6 +14,7 @@ import ProductDetail from "./pages/ProductDetail";
 import WhyMakhana from "./pages/WhyMakhana";
 import Export from "./pages/Export";
 import Contact from "./pages/Contact";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,15 @@ const App = () => (
             <Route path="/why-makhana" element={<WhyMakhana />} />
             <Route path="/export" element={<Export />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <div>Profile Page (coming soon)</div>
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </CartProvider>
