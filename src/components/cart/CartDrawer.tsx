@@ -128,8 +128,8 @@ const CartDrawer = () => {
                   ₹{total.toLocaleString('en-IN')}
                 </span>
               </div>
-              <Button variant="luxury" size="lg" className="w-full mb-3">
-                Proceed to Checkout
+              <Button variant="luxury" size="lg" className="w-full mb-3" asChild onClick={() => setIsCartOpen(false)}>
+                <Link to="/checkout">Proceed to Checkout</Link>
               </Button>
               <Button
                 variant="outline"
