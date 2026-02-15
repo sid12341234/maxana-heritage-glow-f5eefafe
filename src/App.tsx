@@ -12,6 +12,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./pages/Checkout";
 import WhyMakhana from "./pages/WhyMakhana";
 import Export from "./pages/Export";
 import Contact from "./pages/Contact";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/products" element={<Products />} />
             <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/why-makhana" element={<WhyMakhana />} />
             <Route path="/export" element={<Export />} />
             <Route path="/contact" element={<Contact />} />

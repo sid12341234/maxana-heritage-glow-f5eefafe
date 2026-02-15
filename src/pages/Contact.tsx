@@ -83,10 +83,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium mb-1">Email</h3>
                     <a
-                      href="mailto:hello@maxana.in"
+                      href="mailto:info@maxana.in"
                       className="text-muted-foreground text-sm hover:text-primary transition-colors"
                     >
-                      hello@maxana.in
+                      info@maxana.in
                     </a>
                   </div>
                 </div>
@@ -98,7 +98,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium mb-1">Phone</h3>
                     <p className="text-muted-foreground text-sm">
-                      +91 98765 43210
+                      <a href="tel:+919608429953" className="hover:text-primary transition-colors">+91 96084 29953</a>
+                    </p>
+                    <p className="text-muted-foreground text-sm">
+                      <a href="tel:+917739410066" className="hover:text-primary transition-colors">+91 77394 10066</a>
                     </p>
                   </div>
                 </div>
@@ -110,7 +113,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium mb-1">Business Hours</h3>
                     <p className="text-muted-foreground text-sm">
-                      Mon - Sat: 9:00 AM - 6:00 PM IST
+                      Mon - Sun: 9:00 AM - 9:00 PM IST
                     </p>
                   </div>
                 </div>
@@ -180,18 +183,43 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map Embed */}
-      <section className="h-96 bg-muted">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d459628.77476!2d86.0!3d26.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ee8ad0ace844fb%3A0x4b0e9fe43dfa49bc!2sMithila!5e0!3m2!1sen!2sin!4v1"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Maxana Location - Mithila, Bihar"
-        />
+      {/* Dual Map Embeds */}
+      <section className="bg-muted">
+        <div className="container-luxury py-12">
+          <h2 className="font-heading text-3xl text-center mb-8">Our Locations</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="font-medium text-center mb-4">Corporate Office — Mumbai</h3>
+              <div className="h-80 rounded-xl overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.0!2d72.86!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7a3a3a3a3a3%3A0x0!2sKandivali%20East%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Maxana Corporate Office - Mumbai"
+                />
+              </div>
+            </div>
+            <div>
+              <h3 className="font-medium text-center mb-4">Manufacturing Unit — Madhubani, Bihar</h3>
+              <div className="h-80 rounded-xl overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.0!2d86.22!3d26.59!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ee8ad0ace844fb%3A0x0!2sMadhubani%2C%20Bihar!5e0!3m2!1sen!2sin!4v1"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Maxana Manufacturing Unit - Madhubani"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </Layout>
   );

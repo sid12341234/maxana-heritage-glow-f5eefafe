@@ -34,7 +34,7 @@ const FeaturedProducts = () => {
               key={product.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7, delay: index * 0.15 }}
               className="group"
             >

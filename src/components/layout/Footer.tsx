@@ -129,12 +129,14 @@ const Footer = () => {
               <p className="font-medium text-background/90 pt-2">Manufacturing Unit</p>
               <p>Indira Complex, NH Road,<br />Duilipatti, Jainagar, Madhubani,<br />Bihar 847228</p>
               <a
-                href="mailto:hello@maxana.in"
+                href="mailto:info@maxana.in"
                 className="flex items-center gap-2 hover:text-gold transition-colors pt-2"
               >
                 <Mail size={16} />
-                hello@maxana.in
+                info@maxana.in
               </a>
+              <p className="text-sm pt-1">+91 96084 29953</p>
+              <p className="text-sm">+91 77394 10066</p>
             </div>
           </div>
         </div>
