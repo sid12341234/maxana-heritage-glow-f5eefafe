@@ -65,9 +65,13 @@ const Contact = () => {
                     <MapPin size={20} className="text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-medium mb-1">Address</h3>
+                    <h3 className="font-medium mb-1">Corporate Office</h3>
                     <p className="text-muted-foreground text-sm">
-                      Mithila, Bihar, India
+                      JSV INTERNATIONAL LLP<br />Shop No. 43, MMRDA Vasant Pride,<br />Kandivali East, Mumbai, Maharashtra 400101
+                    </p>
+                    <h3 className="font-medium mb-1 mt-4">Manufacturing Unit</h3>
+                    <p className="text-muted-foreground text-sm">
+                      Indira Complex, NH Road,<br />Duilipatti, Jainagar, Madhubani,<br />Bihar 847228
                     </p>
                   </div>
                 </div>

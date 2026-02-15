@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Facebook, Linkedin, Twitter, Mail } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Twitter, Mail, Youtube } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Footer = () => {
@@ -66,6 +66,15 @@ const Footer = () => {
               >
                 <Twitter size={20} />
               </a>
+              <a
+                href="https://www.youtube.com/@Maxana-t6s"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-background/50 hover:text-gold transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube size={20} />
+              </a>
             </div>
           </div>
 
@@ -115,10 +124,13 @@ const Footer = () => {
               Get in Touch
             </h5>
             <div className="space-y-4 text-sm text-background/70">
-              <p>Mithila, Bihar, India</p>
+              <p className="font-medium text-background/90">Corporate Office</p>
+              <p>JSV INTERNATIONAL LLP<br />Shop No. 43, MMRDA Vasant Pride,<br />Kandivali East, Mumbai,<br />Maharashtra 400101, India</p>
+              <p className="font-medium text-background/90 pt-2">Manufacturing Unit</p>
+              <p>Indira Complex, NH Road,<br />Duilipatti, Jainagar, Madhubani,<br />Bihar 847228</p>
               <a
                 href="mailto:hello@maxana.in"
-                className="flex items-center gap-2 hover:text-gold transition-colors"
+                className="flex items-center gap-2 hover:text-gold transition-colors pt-2"
               >
                 <Mail size={16} />
                 hello@maxana.in

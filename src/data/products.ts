@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: "cream-cheese-onion",
     name: "Cream Cheese & Onion",
-    category: "Classic Collection",
+    category: "Roasted Makhana",
     image: creamCheesePouch,
     price: "₹299",
     weight: "100g",
@@ -48,7 +48,7 @@ export const products: Product[] = [
   {
     id: "himalayan-salt-pepper",
     name: "Himalayan Salt & Cracked Pepper",
-    category: "Signature Series",
+    category: "Roasted Makhana",
     image: himalayanSaltTin,
     price: "₹549",
     weight: "150g",
@@ -68,7 +68,7 @@ export const products: Product[] = [
   {
     id: "peri-peri",
     name: "Peri Peri Blaze",
-    category: "Spice Collection",
+    category: "Roasted Makhana",
     image: creamCheesePouch,
     price: "₹299",
     weight: "100g",
@@ -88,7 +88,7 @@ export const products: Product[] = [
   {
     id: "hot-korean",
     name: "Hot Korean Gochujang",
-    category: "Spice Collection",
+    category: "Roasted Makhana",
     image: himalayanSaltTin,
     price: "₹549",
     weight: "150g",
@@ -108,7 +108,7 @@ export const products: Product[] = [
   {
     id: "truffle-parmesan",
     name: "Black Truffle & Parmesan",
-    category: "Luxury Edition",
+    category: "Roasted Makhana",
     image: premiumTins,
     price: "₹799",
     weight: "100g",
@@ -128,7 +128,7 @@ export const products: Product[] = [
   {
     id: "wasabi-nori",
     name: "Wasabi & Nori",
-    category: "Asian Fusion",
+    category: "Roasted Makhana",
     image: creamCheesePouch,
     price: "₹349",
     weight: "100g",
@@ -148,7 +148,7 @@ export const products: Product[] = [
   {
     id: "premium-collection",
     name: "Premium Tin Collection",
-    category: "Gift Set",
+    category: "Raw Makhana",
     image: premiumTins,
     price: "₹1,499",
     weight: "3 × 150g",
@@ -168,7 +168,7 @@ export const products: Product[] = [
   {
     id: "family-assorted",
     name: "Family Pack Assorted",
-    category: "Value Pack",
+    category: "Raw Makhana",
     image: productsLineup,
     price: "₹999",
     weight: "4 × 100g",

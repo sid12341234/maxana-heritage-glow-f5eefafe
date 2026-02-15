@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { products } from "@/data/products";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-const categories = ["All", "Classic Collection", "Signature Series", "Spice Collection", "Luxury Edition", "Asian Fusion", "Gift Set", "Value Pack"];
+const categories = ["All", "Raw Makhana", "Roasted Makhana"];
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
