@@ -192,7 +192,7 @@ const Contact = () => {
               <h3 className="font-medium text-center mb-4">Corporate Office — Mumbai</h3>
               <div className="h-80 rounded-xl overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.0!2d72.86!3d19.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7a3a3a3a3a3%3A0x0!2sKandivali%20East%2C%20Mumbai!5e0!3m2!1sen!2sin!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.2!2d72.8656!3d19.2094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b6f50e25b1db%3A0x9e0c1e6a7a5d8e3f!2sVasant%20Pride%2C%20Kandivali%20East%2C%20Mumbai%2C%20Maharashtra%20400101!5e0!3m2!1sen!2sin!4v1"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -207,7 +207,7 @@ const Contact = () => {
               <h3 className="font-medium text-center mb-4">Manufacturing Unit — Madhubani, Bihar</h3>
               <div className="h-80 rounded-xl overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.0!2d86.22!3d26.59!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ee8ad0ace844fb%3A0x0!2sMadhubani%2C%20Bihar!5e0!3m2!1sen!2sin!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.5!2d86.2180!3d26.5935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ee8ad0ace844fb%3A0x1234567890abcdef!2sJainagar%2C%20Madhubani%2C%20Bihar%20847226!5e0!3m2!1sen!2sin!4v1"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
