@@ -7,6 +7,7 @@ import koreanGochujangTin from "@/assets/korean-gochujang-tin.png";
 import truffleParmesanTin from "@/assets/truffle-parmesan-tin.png";
 import wasabiNoriPouch from "@/assets/wasabi-nori-pouch.png";
 import familyAssortedPack from "@/assets/family-assorted-pack.png";
+import janakiMakhanaPouch from "@/assets/janaki-makhana-pouch.png";
 
 export interface Product {
   id: string;
@@ -30,6 +31,20 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  {
+    id: "janaki-makhana",
+    name: "Janaki Makhana",
+    category: "Raw Makhana",
+    image: janakiMakhanaPouch,
+    price: "₹249",
+    weight: "250g",
+    description: "Pure, hand-picked raw foxnuts from the lotus ponds of Mithila — a GI-tagged superfood in its purest form.",
+    longDescription: "Janaki Makhana celebrates the heritage of Mithila's lotus ponds, where each foxnut is hand-harvested, sun-dried and gently popped using time-honoured craft. Unsalted, unflavoured and untouched by oils, this is makhana the way nature intended — a clean canvas of nutty, earthy crunch ready for roasting at home, tossing into curries, or enjoying as a guilt-free snack. Carrying a GI tag for authentic Bihar provenance, every 250g pouch is sealed for freshness and traceable to its source.",
+    ingredients: ["100% Premium Raw Makhana (Fox Nuts) — GI Tagged from Mithila"],
+    nutritionalInfo: { calories: "347 kcal", protein: "9.7g", carbs: "76.9g", fat: "0.1g", fiber: "14.5g" },
+    benefits: ["Low Calorie", "Low Fat", "High Protein", "High Fibre", "Antioxidant Rich", "Zero Cholesterol"],
+    featured: false
+  },
   {
     id: "cream-cheese-onion",
     name: "Cream Cheese & Onion",

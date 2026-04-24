@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBackground from "@/assets/hero-background.jpg";
@@ -6,10 +6,14 @@ import heroBackground from "@/assets/hero-background.jpg";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const HeroSection = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, 120]);
+  const scale = useTransform(scrollY, [0, 600], [1, 1.1]);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Luxury Overlay */}
-      <div className="absolute inset-0">
+      {/* Background Image with Luxury Overlay - Parallax */}
+      <motion.div className="absolute inset-0" style={{ y, scale }}>
         <img
           src={heroBackground}
           alt="Premium makhana scattered on marble surface"
@@ -18,7 +22,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/50" />
         {/* Luxury pattern overlay */}
         <div className="absolute inset-0 lv-pattern opacity-50" />
-      </div>
+      </motion.div>
 
       {/* Content */}
       <div className="container-luxury relative z-10 pt-28">
