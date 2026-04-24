@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all duration-300 ease-out hover:scale-105 active:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:hover:scale-100 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -20,11 +20,11 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground rounded-2xl",
         link: "text-primary underline-offset-4 hover:underline",
         luxury:
-          "bg-primary text-primary-foreground hover:opacity-90 shadow-elegant hover:shadow-luxury tracking-[0.2em] uppercase text-xs font-semibold rounded-full",
+          "bg-primary text-primary-foreground hover:opacity-90 shadow-elegant hover:shadow-[0_0_24px_-4px_hsl(var(--gold)/0.5),0_12px_48px_-12px_hsl(var(--primary)/0.3)] tracking-[0.2em] uppercase text-xs font-semibold rounded-full",
         gold:
-          "bg-gradient-to-r from-accent via-accent/90 to-accent text-foreground hover:opacity-90 tracking-[0.2em] uppercase text-xs font-semibold rounded-full shadow-gold",
+          "bg-gradient-to-r from-accent via-accent/90 to-accent text-foreground hover:opacity-90 tracking-[0.2em] uppercase text-xs font-semibold rounded-full shadow-gold hover:shadow-[0_0_28px_-2px_hsl(var(--gold)/0.6)]",
         hero:
-          "bg-primary text-primary-foreground hover:opacity-90 px-10 py-5 text-sm tracking-[0.2em] uppercase shadow-luxury rounded-full font-semibold",
+          "bg-primary text-primary-foreground hover:opacity-90 px-10 py-5 text-sm tracking-[0.2em] uppercase shadow-luxury hover:shadow-[0_0_32px_-4px_hsl(var(--gold)/0.55),0_20px_60px_-20px_hsl(var(--primary)/0.4)] rounded-full font-semibold",
         heroOutline:
           "border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground px-10 py-5 text-sm tracking-[0.2em] uppercase rounded-full font-semibold",
       },
