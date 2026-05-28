@@ -25,7 +25,7 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const CART_STORAGE_KEY = 'maxana_cart';
+const CART_STORAGE_KEY = 'jsv_cart';
 
 export const useCart = () => {
   const context = useContext(CartContext);
