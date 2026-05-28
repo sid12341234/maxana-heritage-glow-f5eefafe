@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/contexts/CartContext";
+import { useSound } from "@/contexts/SoundContext";
+import jsvLogo from "@/assets/jsv-logo.png";
 
 const navLinks = [
   { name: "Home", path: "/home" },
@@ -20,11 +22,10 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { itemCount, setIsCartOpen } = useCart();
+  const { isMuted, toggleMute, play } = useSound();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -38,29 +39,29 @@ const Header = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-700",
         isScrolled
-          ? "bg-background/98 backdrop-blur-xl shadow-elegant py-4"
-          : "bg-transparent py-6"
+          ? "bg-background/98 backdrop-blur-xl shadow-elegant py-3"
+          : "bg-transparent py-5"
       )}
     >
       <nav className="container-luxury flex items-center justify-between">
         {/* Logo */}
-        <Link to="/home" className="flex items-center gap-3 group">
-          <span className="font-heading text-2xl md:text-3xl font-semibold tracking-[0.15em] text-foreground group-hover:text-primary transition-colors duration-300">
-            MAXANA
+        <Link to="/home" className="flex items-center gap-3 group" onClick={() => play("click")}>
+          <img src={jsvLogo} alt="JSV International LLP" className="h-12 md:h-14 w-auto object-contain" />
+          <span className="hidden sm:inline font-heading text-base md:text-lg font-semibold tracking-[0.15em] text-foreground">
+            JSV International
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-9">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
+              onClick={() => play("click")}
               className={cn(
                 "text-sm tracking-[0.15em] uppercase transition-all duration-300 link-underline font-medium",
-                location.pathname === link.path
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                location.pathname === link.path ? "text-primary" : "text-muted-foreground hover:text-foreground"
               )}
             >
               {link.name}
@@ -69,50 +70,68 @@ const Header = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            onClick={() => { play("click"); toggleMute(); }}
+            aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
+          >
+            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          </Button>
           <Button
             variant="ghost"
             size="icon"
             className="rounded-full relative"
-            onClick={() => setIsCartOpen(true)}
+            onClick={() => { play("click"); setIsCartOpen(true); }}
           >
             <ShoppingBag className="w-5 h-5" />
             {itemCount > 0 && (
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 w-5 h-5 bg-gold text-foreground text-xs font-bold rounded-full flex items-center justify-center shadow-gold"
+                className="absolute -top-1 -right-1 w-5 h-5 bg-accent text-foreground text-xs font-bold rounded-full flex items-center justify-center shadow-gold"
               >
                 {itemCount}
               </motion.span>
             )}
           </Button>
-          <Button variant="luxury" size="sm" asChild>
+          <Button variant="luxury" size="sm" asChild onClick={() => play("click")}>
             <Link to="/products">Shop Now</Link>
           </Button>
         </div>
 
         {/* Mobile Actions */}
-        <div className="lg:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="rounded-full"
+            onClick={() => { play("click"); toggleMute(); }}
+            aria-label={isMuted ? "Unmute sounds" : "Mute sounds"}
+          >
+            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          </Button>
           <Button
             variant="ghost"
             size="icon"
             className="rounded-full relative"
-            onClick={() => setIsCartOpen(true)}
+            onClick={() => { play("click"); setIsCartOpen(true); }}
           >
             <ShoppingBag className="w-5 h-5" />
             {itemCount > 0 && (
               <motion.span
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="absolute -top-1 -right-1 w-5 h-5 bg-gold text-foreground text-xs font-bold rounded-full flex items-center justify-center shadow-gold"
+                className="absolute -top-1 -right-1 w-5 h-5 bg-accent text-foreground text-xs font-bold rounded-full flex items-center justify-center shadow-gold"
               >
                 {itemCount}
               </motion.span>
             )}
           </Button>
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={() => { play("click"); setIsMobileMenuOpen(!isMobileMenuOpen); }}
             className="p-2 text-foreground hover:text-primary transition-colors"
             aria-label="Toggle menu"
           >
@@ -136,17 +155,16 @@ const Header = () => {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onClick={() => play("click")}
                   className={cn(
                     "text-base tracking-[0.15em] uppercase py-2 transition-colors font-medium",
-                    location.pathname === link.path
-                      ? "text-primary"
-                      : "text-muted-foreground"
+                    location.pathname === link.path ? "text-primary" : "text-muted-foreground"
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Button variant="luxury" className="mt-6" asChild>
+              <Button variant="luxury" className="mt-6" asChild onClick={() => play("click")}>
                 <Link to="/products">Shop Now</Link>
               </Button>
             </div>

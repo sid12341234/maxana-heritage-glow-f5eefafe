@@ -1,12 +1,3 @@
-import creamCheesePouch from "@/assets/cream-cheese-pouch.png";
-import premiumTins from "@/assets/premium-tins.png";
-import himalayanSaltTin from "@/assets/himalayan-salt-tin.png";
-import productsLineup from "@/assets/products-lineup.png";
-import periPeriPouch from "@/assets/peri-peri-pouch.png";
-import koreanGochujangTin from "@/assets/korean-gochujang-tin.png";
-import truffleParmesanTin from "@/assets/truffle-parmesan-tin.png";
-import wasabiNoriPouch from "@/assets/wasabi-nori-pouch.png";
-import familyAssortedPack from "@/assets/family-assorted-pack.png";
 import janakiMakhanaPouch from "@/assets/janaki-makhana-pouch.png";
 
 export interface Product {
@@ -32,137 +23,71 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    id: "janaki-makhana",
-    name: "Janaki Makhana",
-    category: "Raw Makhana",
+    id: "shahi-jumbo",
+    name: "Shahi Jumbo",
+    category: "Retail",
+    image: janakiMakhanaPouch,
+    price: "₹599",
+    weight: "250g",
+    description: "Our most premium pack — 6(+) Suta handpicked jumbo pops. The biggest, whitest, crunchiest makhana on our line.",
+    longDescription: "Shahi Jumbo is the crown of our retail range. Sourced from the deepest lotus ponds of Mithila and hand-graded to 6(+) suta size, these jumbo pops are over 19mm of cloud-light crunch. Each piece is sun-dried, single-batch roasted and quality-checked twice — making it the finest 250g pack you can put on your table.",
+    ingredients: ["100% Raw Makhana (Fox Nuts) — 6(+) Suta Handpicked, GI-tagged Mithila"],
+    nutritionalInfo: { calories: "347 kcal", protein: "9.7g", carbs: "76.9g", fat: "0.1g", fiber: "14.5g" },
+    benefits: ["Jumbo 6(+) Grade", "Hand-Picked", "Low Fat", "High Protein", "Antioxidant Rich"],
+    featured: true,
+  },
+  {
+    id: "khaas-makhana",
+    name: "Khaas Makhana",
+    category: "Retail",
+    image: janakiMakhanaPouch,
+    price: "₹399",
+    weight: "250g",
+    description: "Our everyday classic — 5 Suta makhana with great pop and consistent quality, perfect for daily snacking.",
+    longDescription: "Khaas Makhana is the heart of our retail line. Graded at 5 suta, these medium-large pops deliver the perfect balance of crunch, fluffiness and value. Roast at home with a touch of ghee and rock salt, or toss into a curry — Khaas is the makhana you'll keep reaching for.",
+    ingredients: ["100% Raw Makhana (Fox Nuts) — 5 Suta, GI-tagged Mithila"],
+    nutritionalInfo: { calories: "347 kcal", protein: "9.7g", carbs: "76.9g", fat: "0.1g", fiber: "14.5g" },
+    benefits: ["5 Suta Grade", "Daily Snack", "High Fibre", "Zero Cholesterol"],
+    featured: true,
+  },
+  {
+    id: "bachat-pack",
+    name: "Bachat Pack",
+    category: "Retail",
     image: janakiMakhanaPouch,
     price: "₹249",
     weight: "250g",
-    description: "Pure, hand-picked raw foxnuts from the lotus ponds of Mithila — a GI-tagged superfood in its purest form.",
-    longDescription: "Janaki Makhana celebrates the heritage of Mithila's lotus ponds, where each foxnut is hand-harvested, sun-dried and gently popped using time-honoured craft. Unsalted, unflavoured and untouched by oils, this is makhana the way nature intended — a clean canvas of nutty, earthy crunch ready for roasting at home, tossing into curries, or enjoying as a guilt-free snack. Carrying a GI tag for authentic Bihar provenance, every 250g pouch is sealed for freshness and traceable to its source.",
-    ingredients: ["100% Premium Raw Makhana (Fox Nuts) — GI Tagged from Mithila"],
+    description: "Family-friendly value pack — 4 Suta makhana that's wonderfully economical without compromising on freshness.",
+    longDescription: "Bachat Pack is built for households that snack right every day. Graded at 4 suta with a smaller, denser pop, it's the most economical way to enjoy authentic Mithila makhana — perfect for kheer, namkeen mixes and lunchbox snacks.",
+    ingredients: ["100% Raw Makhana (Fox Nuts) — 4 Suta, GI-tagged Mithila"],
     nutritionalInfo: { calories: "347 kcal", protein: "9.7g", carbs: "76.9g", fat: "0.1g", fiber: "14.5g" },
-    benefits: ["Low Calorie", "Low Fat", "High Protein", "High Fibre", "Antioxidant Rich", "Zero Cholesterol"],
-    featured: false
+    benefits: ["4 Suta Grade", "Family Value", "Low Calorie", "Vegan"],
+    featured: true,
   },
-  {
-    id: "cream-cheese-onion",
-    name: "Cream Cheese & Onion",
-    category: "Roasted Makhana",
-    image: creamCheesePouch,
-    price: "₹299",
-    weight: "100g",
-    description: "A creamy, savory delight with the perfect balance of cheese and onion flavors.",
-    longDescription: "Indulge in the rich, velvety taste of our Cream Cheese & Onion makhana. Each puff is carefully roasted to perfection and generously coated with a premium blend of cream cheese powder and caramelized onion seasoning. This sophisticated flavor profile makes it the perfect companion for your evening tea or as an elegant appetizer for gatherings.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Cream Cheese Powder", "Onion Powder", "Rice Bran Oil", "Sea Salt", "Natural Flavors"],
-    nutritionalInfo: { calories: "120 kcal", protein: "4g", carbs: "18g", fat: "3.5g", fiber: "2g" },
-    benefits: ["High in Protein", "Low Glycemic Index", "Gluten-Free", "No Artificial Colors"],
-    featured: true
-  },
-  {
-    id: "himalayan-salt-pepper",
-    name: "Himalayan Salt & Cracked Pepper",
-    category: "Roasted Makhana",
-    image: himalayanSaltTin,
-    price: "₹549",
-    weight: "150g",
-    description: "Pure Himalayan salt meets freshly cracked pepper in this sophisticated snack.",
-    longDescription: "Experience the pristine purity of pink Himalayan salt paired with the aromatic warmth of freshly cracked black pepper. Our Signature Series tin contains hand-selected makhana roasted in small batches to ensure consistent crunch and flavor. The premium tin packaging preserves freshness while making it an ideal gift for discerning palates.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Pink Himalayan Salt", "Cracked Black Pepper", "Cold-Pressed Olive Oil"],
-    nutritionalInfo: { calories: "110 kcal", protein: "4.5g", carbs: "16g", fat: "3g", fiber: "2.5g" },
-    benefits: ["84+ Minerals from Himalayan Salt", "Antioxidant Rich", "Heart Healthy", "Keto Friendly"],
-    featured: true
-  },
-  {
-    id: "peri-peri",
-    name: "Peri Peri Blaze",
-    category: "Roasted Makhana",
-    image: periPeriPouch,
-    price: "₹299",
-    weight: "100g",
-    description: "Fiery African-inspired spice blend that delivers a bold, smoky heat.",
-    longDescription: "Ignite your taste buds with our Peri Peri Blaze makhana. Inspired by the legendary African bird's eye chili, this flavor combines smoky paprika, garlic, lemon zest, and a carefully calibrated heat level that builds with each bite. Perfect for spice enthusiasts who crave adventure without compromising on health.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Peri Peri Seasoning", "Paprika", "Garlic Powder", "Lemon Zest", "Rice Bran Oil", "Sea Salt"],
-    nutritionalInfo: { calories: "115 kcal", protein: "4g", carbs: "17g", fat: "3.2g", fiber: "2g" },
-    benefits: ["Metabolism Boosting", "Rich in Capsaicin", "Vegan Friendly", "No MSG"],
-    featured: true
-  },
-  {
-    id: "hot-korean",
-    name: "Hot Korean Gochujang",
-    category: "Roasted Makhana",
-    image: koreanGochujangTin,
-    price: "₹549",
-    weight: "150g",
-    description: "Sweet, spicy, and umami-rich Korean gochujang flavor experience.",
-    longDescription: "Transport your senses to Seoul with our Hot Korean Gochujang makhana. This premium creation features the iconic Korean fermented chili paste flavor—a perfect harmony of sweet, spicy, and deeply savory umami notes. Each tin is a journey through Korean cuisine's most beloved flavor profile, reimagined as a healthy superfood snack.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Gochujang Seasoning", "Korean Chili Flakes", "Sesame Seeds", "Garlic", "Rice Bran Oil", "Organic Cane Sugar"],
-    nutritionalInfo: { calories: "118 kcal", protein: "4.2g", carbs: "17.5g", fat: "3.3g", fiber: "2.2g" },
-    benefits: ["Probiotic Benefits", "Rich in Antioxidants", "Natural Energy Boost", "Gut-Friendly"],
-    featured: false
-  },
-  {
-    id: "truffle-parmesan",
-    name: "Black Truffle & Parmesan",
-    category: "Roasted Makhana",
-    image: truffleParmesanTin,
-    price: "₹799",
-    weight: "100g",
-    description: "Decadent Italian-inspired luxury with real truffle essence.",
-    longDescription: "Our most luxurious creation yet. The Black Truffle & Parmesan makhana features real Italian black truffle essence and aged Parmigiano-Reggiano. Each piece is a testament to culinary excellence, offering an earthy, umami-rich experience that rivals the finest gourmet treats. Presented in our signature luxury tin.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Black Truffle Essence", "Aged Parmesan Cheese", "Italian Herbs", "Extra Virgin Olive Oil", "Sea Salt"],
-    nutritionalInfo: { calories: "125 kcal", protein: "5g", carbs: "15g", fat: "4.5g", fiber: "2g" },
-    benefits: ["Calcium Rich", "Vitamin D", "Premium Ingredients", "Gourmet Experience"],
-    featured: false
-  },
-  {
-    id: "wasabi-nori",
-    name: "Wasabi & Nori",
-    category: "Roasted Makhana",
-    image: wasabiNoriPouch,
-    price: "₹349",
-    weight: "100g",
-    description: "Japanese-inspired with authentic wasabi kick and seaweed umami.",
-    longDescription: "Embrace the essence of Japan with our Wasabi & Nori makhana. Real wasabi delivers a clean, nasal heat while premium nori seaweed adds deep ocean umami. This sophisticated blend appeals to sushi lovers and adventurous snackers alike, offering a unique fusion of Japanese flavors with Indian superfood tradition.",
-    ingredients: ["Premium Makhana (Fox Nuts)", "Wasabi Powder", "Nori Seaweed", "Soy Sauce Powder", "Rice Bran Oil", "Sea Salt"],
-    nutritionalInfo: { calories: "112 kcal", protein: "4.3g", carbs: "16.5g", fat: "3g", fiber: "2.3g" },
-    benefits: ["Iodine Rich", "Antibacterial Properties", "Brain Health", "Low Sodium Option"],
-    featured: false
-  },
-  {
-    id: "premium-collection",
-    name: "Premium Tin Collection",
-    category: "Raw Makhana",
-    image: premiumTins,
-    price: "₹1,499",
-    weight: "3 × 150g",
-    description: "An exquisite collection featuring our three signature flavors in premium tins.",
-    longDescription: "The ultimate Maxana experience. Our Premium Tin Collection brings together three of our most beloved flavors in elegant, reusable tins. Perfect for gifting or treating yourself, this collection showcases the breadth of our flavor expertise. Each tin is nestled in a luxurious gift box with our signature gold accents.",
-    ingredients: ["Himalayan Salt & Pepper", "Peri Peri Blaze", "Hot Korean Gochujang"],
-    nutritionalInfo: { calories: "Varies by flavor", protein: "4-5g per serving", carbs: "16-18g per serving", fat: "3-4g per serving", fiber: "2-2.5g per serving" },
-    benefits: ["Variety Pack", "Premium Gifting", "Reusable Tins", "Best Value"],
-    featured: false
-  },
-  {
-    id: "family-assorted",
-    name: "Family Pack Assorted",
-    category: "Raw Makhana",
-    image: familyAssortedPack,
-    price: "₹999",
-    weight: "4 × 100g",
-    description: "Explore our range with four different flavors in convenient pouch packaging.",
-    longDescription: "Share the joy of healthy snacking with the whole family. Our Family Pack Assorted brings together four diverse flavors to satisfy every palate. From the creamy Classic to the fiery Spice Collection, there's something for everyone. Convenient pouch packaging keeps each flavor fresh and portion-controlled.",
-    ingredients: ["Cream Cheese & Onion", "Himalayan Salt & Pepper", "Peri Peri Blaze", "Wasabi & Nori"],
-    nutritionalInfo: { calories: "110-120 kcal per serving", protein: "4-4.5g per serving", carbs: "16-18g per serving", fat: "3-3.5g per serving", fiber: "2-2.5g per serving" },
-    benefits: ["Family Sharing", "Flavor Discovery", "Great Value", "Perfect for Parties"],
-    featured: false
-  }
 ];
 
-export const getProductById = (id: string): Product | undefined => {
-  return products.find(product => product.id === id);
-};
+export interface BulkGrade {
+  grade: string;
+  size: string;
+  hp: boolean;
+}
 
-export const getFeaturedProducts = (): Product[] => {
-  return products.filter(product => product.featured);
-};
+export const bulkGrades: BulkGrade[] = [
+  { grade: "3 Suta", size: "~10–12 mm", hp: false },
+  { grade: "4 Suta", size: "12.5–15.5 mm", hp: false },
+  { grade: "4 Suta HP", size: "12.5–15.5 mm", hp: true },
+  { grade: "4(+) Plus Suta", size: "12.5–24 mm", hp: false },
+  { grade: "4(+) Plus HP", size: "12.5–24 mm", hp: true },
+  { grade: "5 Suta Pure", size: "15.7–19 mm", hp: false },
+  { grade: "5 Suta Pure HP", size: "15.7–19 mm", hp: true },
+  { grade: "5(+) Plus Non-HP", size: "15.75–24 mm", hp: false },
+  { grade: "5(+) Plus HP", size: "15.75–24 mm", hp: true },
+  { grade: "6(+) Plus Non-HP", size: "19–24 mm", hp: false },
+  { grade: "6(+) Plus HP", size: "19–24 mm", hp: true },
+];
+
+export const getProductById = (id: string): Product | undefined =>
+  products.find((p) => p.id === id);
+
+export const getFeaturedProducts = (): Product[] =>
+  products.filter((p) => p.featured);
