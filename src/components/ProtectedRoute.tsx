@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-pulse font-heading text-2xl tracking-[0.15em] text-muted-foreground">
-          MAXANA
+          JSV
         </div>
       </div>
     );

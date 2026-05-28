@@ -199,7 +199,7 @@ const Contact = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Maxana Corporate Office - Mumbai"
+                  title="JSV Corporate Office - Mumbai"
                 />
               </div>
             </div>
@@ -214,7 +214,7 @@ const Contact = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Maxana Manufacturing Unit - Madhubani"
+                  title="JSV International Manufacturing Unit - Madhubani"
                 />
               </div>
             </div>

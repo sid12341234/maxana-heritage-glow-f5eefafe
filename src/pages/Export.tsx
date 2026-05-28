@@ -72,7 +72,7 @@ const Export = () => {
             </h1>
             <div className="h-px w-16 bg-gold mx-auto mb-8" />
             <p className="text-lg text-background/70">
-              Partner with Maxana for wholesale, corporate gifting, and
+              Partner with JSV International for wholesale, corporate gifting, and
               international distribution opportunities.
             </p>
           </motion.div>
@@ -114,7 +114,7 @@ const Export = () => {
                 Partnership Benefits
               </p>
               <h2 className="font-heading text-3xl md:text-4xl mb-6">
-                Why Partner with Maxana?
+                Why Partner with JSV International?
               </h2>
               <div className="divider-gold mb-8" />
               <ul className="space-y-4">

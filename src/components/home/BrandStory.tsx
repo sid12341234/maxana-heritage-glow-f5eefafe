@@ -20,7 +20,7 @@ const BrandStory = () => {
             <div className="relative overflow-hidden rounded-[2rem]">
               <img
                 src={lotusPond}
-                alt="Lotus pond in Mithila, India - the birthplace of Maxana makhana"
+                alt="Lotus pond in Mithila, India - the birthplace of JSV makhana"
                 className="w-full h-auto object-cover aspect-[4/3]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
@@ -62,7 +62,7 @@ const BrandStory = () => {
                 continues to thrive.
               </p>
               <p className="leading-relaxed">
-                Maxana was born from a vision to share this remarkable superfood
+                JSV International was born from a vision to share this remarkable superfood
                 with the world, honoring the artisans who have perfected its
                 cultivation while meeting the demands of modern wellness.
               </p>

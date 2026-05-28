@@ -6,6 +6,7 @@ import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
+import { useSound } from "@/contexts/SoundContext";
 import { toast } from "sonner";
 
 const ProductDetail = () => {
@@ -13,6 +14,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const product = getProductById(id || "");
   const { addToCart, setIsCartOpen } = useCart();
+  const { play } = useSound();
   const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   if (!product) {
@@ -120,6 +122,7 @@ const ProductDetail = () => {
                   disabled={isAddingToCart}
                   onClick={async () => {
                     setIsAddingToCart(true);
+                    play("add-to-cart");
                     try {
                       await addToCart({
                         product_id: product.id,

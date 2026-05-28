@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
+import { SoundProvider } from "@/contexts/SoundContext";
 import CartDrawer from "@/components/cart/CartDrawer";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -25,33 +26,35 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <BrowserRouter>
-        <CartProvider>
-          <ScrollToTop />
-          <Toaster />
-          <Sonner />
-          <CartDrawer />
-          <Routes>
-            <Route path="/" element={<Splash />} />
-            <Route path="/home" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:id" element={<ProductDetail />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/why-makhana" element={<WhyMakhana />} />
-            <Route path="/export" element={<Export />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute>
-                  <div>Profile Page (coming soon)</div>
-                </ProtectedRoute>
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </CartProvider>
+        <SoundProvider>
+          <CartProvider>
+            <ScrollToTop />
+            <Toaster />
+            <Sonner />
+            <CartDrawer />
+            <Routes>
+              <Route path="/" element={<Splash />} />
+              <Route path="/home" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/why-makhana" element={<WhyMakhana />} />
+              <Route path="/export" element={<Export />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <div>Profile Page (coming soon)</div>
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CartProvider>
+        </SoundProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

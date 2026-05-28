@@ -26,14 +26,14 @@ const WhyMaxana = () => {
               Our Heritage
             </p>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl mb-6">
-              Why Choose Maxana?
+              Why Choose JSV International?
             </h2>
             <div className="divider-gold mb-8" />
 
             <div className="space-y-6 text-muted-foreground">
               <p className="text-lg leading-relaxed">
                 Born in the ancient lands of Mithila, where lotus seeds have been
-                cultivated for centuries, Maxana brings you the purest form of
+                cultivated for centuries, JSV International brings you the purest form of
                 this remarkable superfood.
               </p>
               <p className="leading-relaxed">

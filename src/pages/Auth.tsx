@@ -81,7 +81,7 @@ const Auth = () => {
       <Card className="w-full max-w-md border-border/40 shadow-elegant">
         <CardHeader className="text-center space-y-2">
           <span className="font-heading text-3xl font-semibold tracking-[0.15em] text-foreground">
-            MAXANA
+            JSV
           </span>
           <CardTitle className="font-heading text-xl">
             {isLogin ? "Welcome Back" : "Create Account"}
@@ -89,7 +89,7 @@ const Auth = () => {
           <CardDescription>
             {isLogin
               ? "Sign in to your account"
-              : "Join the Maxana experience"}
+              : "Join the JSV experience"}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
