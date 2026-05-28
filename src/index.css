@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,141 +6,126 @@
 
 @layer base {
   :root {
-    /* Louis Vuitton Inspired - Deep Brown & Rich Cream */
-    --background: 30 25% 95%;
-    --foreground: 20 40% 10%;
+    /* JSV International — Cream, Deep Brown, Warm Gold */
+    --background: 38 60% 95%;        /* #FAF4E8 cream */
+    --foreground: 18 43% 18%;        /* #43271A deep brown */
 
-    --card: 32 30% 97%;
-    --card-foreground: 20 40% 10%;
+    --card: 0 0% 100%;               /* #FFFFFF */
+    --card-foreground: 18 43% 18%;
 
-    --popover: 32 30% 97%;
-    --popover-foreground: 20 40% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 18 43% 18%;
 
-    /* Deep Chocolate Brown - Primary */
-    --primary: 20 50% 18%;
-    --primary-foreground: 35 35% 96%;
+    /* Deep Chocolate Brown — Primary */
+    --primary: 18 43% 18%;
+    --primary-foreground: 38 60% 95%;
 
-    /* Warm Champagne - Secondary */
-    --secondary: 35 35% 90%;
-    --secondary-foreground: 20 40% 10%;
+    /* Warm Champagne — Secondary */
+    --secondary: 38 50% 90%;
+    --secondary-foreground: 18 43% 18%;
 
-    /* Muted Beige */
-    --muted: 32 20% 92%;
-    --muted-foreground: 20 20% 40%;
+    /* Muted */
+    --muted: 38 45% 92%;
+    --muted-foreground: 18 25% 35%;
 
-    /* Rich Antique Gold Accent */
-    --accent: 40 70% 45%;
-    --accent-foreground: 20 40% 10%;
+    /* Warm Gold Accent */
+    --accent: 38 67% 55%;            /* #D9A23E */
+    --accent-foreground: 18 43% 18%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 35 40% 97%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 38 60% 95%;
 
-    --border: 28 20% 80%;
-    --input: 28 20% 80%;
-    --ring: 20 50% 18%;
+    --border: 38 30% 82%;
+    --input: 38 30% 82%;
+    --ring: 38 67% 55%;
 
     --radius: 1rem;
 
-    /* Luxury Maxana Tokens */
-    --ivory: 30 25% 95%;
-    --ivory-dark: 30 20% 88%;
-    --cream: 32 30% 97%;
-    --cream-dark: 28 25% 85%;
-    --brown: 20 50% 18%;
-    --brown-light: 20 40% 30%;
-    --brown-medium: 20 45% 25%;
-    --gold: 40 70% 45%;
-    --gold-light: 40 60% 60%;
-    --gold-dark: 40 80% 35%;
-    --charcoal: 20 40% 10%;
-    --warm: 30 25% 90%;
-    --champagne: 35 35% 92%;
-    --espresso: 20 55% 12%;
+    /* JSV Tokens */
+    --ivory: 38 60% 95%;
+    --ivory-dark: 38 45% 88%;
+    --cream: 0 0% 100%;
+    --cream-dark: 38 45% 90%;
+    --brown: 18 43% 18%;
+    --brown-light: 18 35% 30%;
+    --brown-medium: 18 40% 24%;
+    --gold: 38 67% 55%;
+    --gold-light: 38 75% 68%;
+    --gold-dark: 38 70% 42%;
+    --charcoal: 18 43% 18%;
+    --warm: 38 45% 90%;
+    --champagne: 38 50% 92%;
+    --espresso: 18 50% 12%;
+    --sage: 38 30% 88%;
 
-    /* Luxury Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(32 30% 97%) 0%, hsl(30 25% 90%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(40 80% 35%) 0%, hsl(40 70% 55%) 50%, hsl(40 80% 35%) 100%);
-    --gradient-overlay: linear-gradient(180deg, rgba(250, 248, 244, 0.97) 0%, rgba(250, 248, 244, 0.85) 100%);
-    --gradient-royal: linear-gradient(135deg, hsl(20 50% 18%) 0%, hsl(20 40% 28%) 100%);
-    --gradient-shimmer: linear-gradient(110deg, transparent 25%, hsl(40 70% 50% / 0.1) 50%, transparent 75%);
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(38 60% 95%) 0%, hsl(38 45% 88%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(38 70% 42%) 0%, hsl(38 75% 65%) 50%, hsl(38 70% 42%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsla(38, 60%, 95%, 0.97) 0%, hsla(38, 60%, 95%, 0.85) 100%);
+    --gradient-royal: linear-gradient(135deg, hsl(18 43% 18%) 0%, hsl(18 35% 28%) 100%);
+    --gradient-shimmer: linear-gradient(110deg, transparent 25%, hsl(38 67% 55% / 0.18) 50%, transparent 75%);
 
-    /* Luxury Shadows */
-    --shadow-soft: 0 4px 24px -6px hsl(20 40% 10% / 0.08);
-    --shadow-elegant: 0 12px 48px -12px hsl(20 40% 10% / 0.12);
-    --shadow-gold: 0 8px 32px -8px hsl(40 70% 45% / 0.25);
-    --shadow-luxury: 0 20px 60px -20px hsl(20 40% 10% / 0.2);
+    /* Shadows */
+    --shadow-soft: 0 4px 24px -6px hsl(18 43% 18% / 0.08);
+    --shadow-elegant: 0 12px 48px -12px hsl(18 43% 18% / 0.14);
+    --shadow-gold: 0 8px 32px -8px hsl(38 67% 55% / 0.4);
+    --shadow-luxury: 0 20px 60px -20px hsl(18 43% 18% / 0.22);
 
     /* Transitions */
     --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     --transition-luxury: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 
-    --sidebar-background: 30 25% 95%;
-    --sidebar-foreground: 20 40% 10%;
-    --sidebar-primary: 20 50% 18%;
-    --sidebar-primary-foreground: 35 35% 96%;
-    --sidebar-accent: 35 35% 90%;
-    --sidebar-accent-foreground: 20 40% 10%;
-    --sidebar-border: 28 20% 80%;
-    --sidebar-ring: 20 50% 18%;
+    --sidebar-background: 38 60% 95%;
+    --sidebar-foreground: 18 43% 18%;
+    --sidebar-primary: 18 43% 18%;
+    --sidebar-primary-foreground: 38 60% 95%;
+    --sidebar-accent: 38 50% 90%;
+    --sidebar-accent-foreground: 18 43% 18%;
+    --sidebar-border: 38 30% 82%;
+    --sidebar-ring: 38 67% 55%;
   }
 
   .dark {
-    --background: 20 25% 6%;
-    --foreground: 35 30% 95%;
-
-    --card: 20 20% 10%;
-    --card-foreground: 35 30% 95%;
-
-    --popover: 20 20% 10%;
-    --popover-foreground: 35 30% 95%;
-
-    --primary: 40 70% 55%;
-    --primary-foreground: 20 25% 6%;
-
-    --secondary: 20 20% 15%;
-    --secondary-foreground: 35 30% 95%;
-
-    --muted: 20 15% 18%;
-    --muted-foreground: 35 20% 60%;
-
-    --accent: 40 70% 55%;
-    --accent-foreground: 20 25% 6%;
-
+    --background: 18 30% 8%;
+    --foreground: 38 50% 95%;
+    --card: 18 25% 12%;
+    --card-foreground: 38 50% 95%;
+    --popover: 18 25% 12%;
+    --popover-foreground: 38 50% 95%;
+    --primary: 38 67% 55%;
+    --primary-foreground: 18 30% 8%;
+    --secondary: 18 20% 16%;
+    --secondary-foreground: 38 50% 95%;
+    --muted: 18 18% 18%;
+    --muted-foreground: 38 30% 65%;
+    --accent: 38 67% 55%;
+    --accent-foreground: 18 30% 8%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 35 30% 95%;
-
-    --border: 20 15% 22%;
-    --input: 20 15% 22%;
-    --ring: 40 70% 55%;
-
-    --ivory: 20 25% 6%;
-    --ivory-dark: 20 20% 10%;
-    --cream: 20 20% 10%;
-    --cream-dark: 20 15% 14%;
-    --brown: 40 70% 55%;
-    --brown-light: 40 60% 65%;
-    --gold: 40 70% 55%;
-    --gold-light: 40 60% 70%;
-    --charcoal: 35 30% 95%;
-    --warm: 20 15% 18%;
+    --destructive-foreground: 38 50% 95%;
+    --border: 18 18% 22%;
+    --input: 18 18% 22%;
+    --ring: 38 67% 55%;
+    --ivory: 18 30% 8%;
+    --ivory-dark: 18 25% 12%;
+    --cream: 18 25% 12%;
+    --cream-dark: 18 20% 16%;
+    --brown: 38 67% 55%;
+    --brown-light: 38 70% 65%;
+    --gold: 38 67% 55%;
+    --gold-light: 38 75% 70%;
+    --charcoal: 38 50% 95%;
+    --warm: 18 18% 18%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
   body {
     @apply bg-background text-foreground font-body antialiased;
     font-feature-settings: "kern" 1, "liga" 1;
   }
-
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading font-medium tracking-tight;
     text-rendering: optimizeLegibility;
@@ -148,121 +133,64 @@
 }
 
 @layer components {
-  .section-padding {
-    @apply px-6 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36;
-  }
-
-  .container-luxury {
-    @apply mx-auto max-w-7xl px-6 md:px-8;
-  }
-
+  .section-padding { @apply px-6 py-20 md:px-8 md:py-28 lg:px-16 lg:py-36; }
+  .container-luxury { @apply mx-auto max-w-7xl px-6 md:px-8; }
   .text-gradient-gold {
     @apply bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent;
     background-size: 200% auto;
     animation: shimmer 3s linear infinite;
   }
-
   .divider-gold {
     @apply h-[2px] w-20 bg-gradient-to-r from-gold via-gold-light to-gold rounded-full;
   }
-
   .card-luxury {
     @apply bg-card rounded-3xl shadow-elegant border border-border/30 overflow-hidden;
     transition: var(--transition-luxury);
   }
-
   .card-luxury:hover {
     @apply shadow-luxury;
-    transform: translateY(-4px);
+    transform: translateY(-8px);
   }
-
   .product-image {
     @apply rounded-2xl overflow-hidden bg-gradient-to-br from-cream to-cream-dark;
-    box-shadow: inset 0 2px 20px -10px hsl(20 40% 10% / 0.1);
+    box-shadow: inset 0 2px 20px -10px hsl(18 43% 18% / 0.1);
   }
-
   .link-underline {
     @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-gradient-to-r after:from-gold after:to-gold-light after:transition-all after:duration-500 hover:after:w-full;
   }
-
   .luxury-badge {
     @apply px-4 py-1.5 bg-primary/5 border border-primary/10 rounded-full text-xs uppercase tracking-[0.2em] font-medium;
   }
-
   .gold-accent {
     @apply text-gold;
-    text-shadow: 0 0 20px hsl(40 70% 45% / 0.3);
+    text-shadow: 0 0 20px hsl(38 67% 55% / 0.3);
   }
-
-  /* Louis Vuitton inspired monogram pattern */
   .lv-pattern {
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(40 70% 45% / 0.03) 1px, transparent 1px),
-      radial-gradient(circle at 75% 75%, hsl(40 70% 45% / 0.03) 1px, transparent 1px);
+    background-image:
+      radial-gradient(circle at 25% 25%, hsl(38 67% 55% / 0.04) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, hsl(38 67% 55% / 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 }
 
 @layer utilities {
-  .animate-fade-up {
-    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
+  .animate-fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-scale-in { animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
 
   @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
-
   @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
-
-  @keyframes shimmer {
-    to {
-      background-position: 200% center;
-    }
-  }
+  @keyframes shimmer { to { background-position: 200% center; } }
 }
