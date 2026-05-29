@@ -8,7 +8,7 @@ const Splash = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const t = setTimeout(() => setShowEnter(true), 3600);
+    const t = setTimeout(() => setShowEnter(true), 4200);
     return () => clearTimeout(t);
   }, []);
 
@@ -17,10 +17,10 @@ const Splash = () => {
     setTimeout(() => navigate("/home"), 800);
   };
 
-  // Side petals fan out AFTER the center petal opens
+  // Side petals fan out from the SAME spot as the center petal
   const sidePetals = [
-    { rotate: -32, delay: 1.4 },
-    { rotate: 32, delay: 1.4 },
+    { rotate: -38, delay: 1.7 },
+    { rotate: 38, delay: 1.7 },
   ];
 
   const letters = ["J", "S", "V"];
@@ -73,7 +73,7 @@ const Splash = () => {
                   style={{ transformOrigin: "0px 10px" }}
                 />
 
-                {/* Side petals — fan out from the center */}
+                {/* Side petals — start hidden behind center petal, then fan outward */}
                 {sidePetals.map((p, i) => (
                   <motion.path
                     key={i}
@@ -81,9 +81,13 @@ const Splash = () => {
                     fill="url(#petalGold)"
                     stroke="hsl(38 70% 45%)"
                     strokeWidth="1"
-                    initial={{ scale: 0.4, rotate: 0, opacity: 0 }}
+                    initial={{ scale: 1, rotate: 0, opacity: 0 }}
                     animate={{ scale: 0.95, rotate: p.rotate, opacity: 1 }}
-                    transition={{ duration: 1, delay: p.delay, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      rotate: { duration: 1.3, delay: p.delay, ease: [0.16, 1, 0.3, 1] },
+                      scale: { duration: 1.3, delay: p.delay, ease: [0.16, 1, 0.3, 1] },
+                      opacity: { duration: 0.4, delay: p.delay },
+                    }}
                     style={{ transformOrigin: "0px 10px" }}
                   />
                 ))}
@@ -104,7 +108,7 @@ const Splash = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{
                     duration: 0.8,
-                    delay: 2.5 + i * 0.18,
+                    delay: 3.2 + i * 0.18,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
@@ -117,7 +121,7 @@ const Splash = () => {
               className="text-xs md:text-sm tracking-[0.5em] uppercase font-medium text-[hsl(22_50%_22%)] mb-6"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 3.2 }}
+              transition={{ duration: 0.9, delay: 3.9 }}
             >
               International LLP
             </motion.p>
@@ -126,7 +130,7 @@ const Splash = () => {
               className="flex items-center justify-center gap-3 mb-4"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 3.4 }}
+              transition={{ duration: 0.8, delay: 4.1 }}
             >
               <div className="h-px w-14 bg-gradient-to-r from-transparent to-[hsl(22_50%_22%)]" />
               <div className="w-1.5 h-1.5 bg-[hsl(22_50%_22%)] rounded-full" />
@@ -137,7 +141,7 @@ const Splash = () => {
               className="font-heading text-base md:text-xl text-[hsl(22_50%_18%)] italic tracking-wide mb-8 text-center"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 3.6 }}
+              transition={{ duration: 0.8, delay: 4.3 }}
             >
               From Mithila's Lotus Ponds — Refined for the World
             </motion.p>
