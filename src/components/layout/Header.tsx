@@ -47,10 +47,8 @@ const Header = () => {
         {/* Logo */}
         <Link to="/home" className="flex items-center gap-3 group" onClick={() => play("click")}>
           <img src={jsvLogo} alt="JSV International LLP" className="h-12 md:h-14 w-auto object-contain" />
-          <span className="hidden sm:inline font-heading text-base md:text-lg font-semibold tracking-[0.15em] text-foreground">
-            JSV International
-          </span>
         </Link>
+
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center gap-9">
