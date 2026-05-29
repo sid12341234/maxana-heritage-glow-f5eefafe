@@ -121,7 +121,7 @@ const Splash = () => {
               className="text-xs md:text-sm tracking-[0.5em] uppercase font-medium text-[hsl(22_50%_22%)] mb-6"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 3.2 }}
+              transition={{ duration: 0.9, delay: 3.9 }}
             >
               International LLP
             </motion.p>
@@ -130,7 +130,7 @@ const Splash = () => {
               className="flex items-center justify-center gap-3 mb-4"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 3.4 }}
+              transition={{ duration: 0.8, delay: 4.1 }}
             >
               <div className="h-px w-14 bg-gradient-to-r from-transparent to-[hsl(22_50%_22%)]" />
               <div className="w-1.5 h-1.5 bg-[hsl(22_50%_22%)] rounded-full" />
@@ -141,7 +141,7 @@ const Splash = () => {
               className="font-heading text-base md:text-xl text-[hsl(22_50%_18%)] italic tracking-wide mb-8 text-center"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 3.6 }}
+              transition={{ duration: 0.8, delay: 4.3 }}
             >
               From Mithila's Lotus Ponds — Refined for the World
             </motion.p>
