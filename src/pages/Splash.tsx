@@ -8,7 +8,7 @@ const Splash = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const t = setTimeout(() => setShowEnter(true), 3600);
+    const t = setTimeout(() => setShowEnter(true), 4200);
     return () => clearTimeout(t);
   }, []);
 
@@ -17,10 +17,10 @@ const Splash = () => {
     setTimeout(() => navigate("/home"), 800);
   };
 
-  // Side petals fan out AFTER the center petal opens
+  // Side petals fan out from the SAME spot as the center petal
   const sidePetals = [
-    { rotate: -32, delay: 1.4 },
-    { rotate: 32, delay: 1.4 },
+    { rotate: -38, delay: 1.7 },
+    { rotate: 38, delay: 1.7 },
   ];
 
   const letters = ["J", "S", "V"];
