@@ -11,18 +11,27 @@ const HeroSection = () => {
   const scale = useTransform(scrollY, [0, 600], [1, 1.1]);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Luxury Overlay - Parallax */}
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      {/* Background Image with shimmering yellow-gold overlay */}
       <motion.div className="absolute inset-0" style={{ y, scale }}>
         <img
           src={heroBackground}
           alt="Premium makhana scattered on marble surface"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-40 mix-blend-luminosity"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/50" />
+        {/* Warm yellow wash */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(48 95% 88% / 0.85) 0%, hsl(45 85% 78% / 0.7) 50%, hsl(38 70% 60% / 0.55) 100%)" }} />
+        {/* Animated shine sweep */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "var(--gradient-shimmer)", backgroundSize: "200% 200%" }}
+          animate={{ backgroundPosition: ["0% 0%", "200% 200%"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
         {/* Luxury pattern overlay */}
         <div className="absolute inset-0 lv-pattern opacity-50" />
       </motion.div>
+
 
       {/* Content */}
       <div className="container-luxury relative z-10 pt-28">
