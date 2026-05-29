@@ -73,7 +73,7 @@ const Splash = () => {
                   style={{ transformOrigin: "0px 10px" }}
                 />
 
-                {/* Side petals — fan out from the center */}
+                {/* Side petals — start hidden behind center petal, then fan outward */}
                 {sidePetals.map((p, i) => (
                   <motion.path
                     key={i}
@@ -81,9 +81,13 @@ const Splash = () => {
                     fill="url(#petalGold)"
                     stroke="hsl(38 70% 45%)"
                     strokeWidth="1"
-                    initial={{ scale: 0.4, rotate: 0, opacity: 0 }}
+                    initial={{ scale: 1, rotate: 0, opacity: 0 }}
                     animate={{ scale: 0.95, rotate: p.rotate, opacity: 1 }}
-                    transition={{ duration: 1, delay: p.delay, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{
+                      rotate: { duration: 1.3, delay: p.delay, ease: [0.16, 1, 0.3, 1] },
+                      scale: { duration: 1.3, delay: p.delay, ease: [0.16, 1, 0.3, 1] },
+                      opacity: { duration: 0.4, delay: p.delay },
+                    }}
                     style={{ transformOrigin: "0px 10px" }}
                   />
                 ))}
@@ -104,7 +108,7 @@ const Splash = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{
                     duration: 0.8,
-                    delay: 2.5 + i * 0.18,
+                    delay: 3.2 + i * 0.18,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
