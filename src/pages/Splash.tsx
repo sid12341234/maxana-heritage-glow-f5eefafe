@@ -3,29 +3,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import jsvLogo from "@/assets/jsv-logo.png";
 
+/**
+ * Splash — the JSV logo itself blooms.
+ * Stage 1: only the center petal is visible (narrow vertical slice, tall & thin).
+ * Stage 2: the slice expands horizontally, revealing the side petals fanning out.
+ * Stage 3: the full logo (flower + wordmark) settles into place with a soft glow.
+ */
 const Splash = () => {
   const [isExiting, setIsExiting] = useState(false);
-  const [showLogo, setShowLogo] = useState(false);
   const [showEnter, setShowEnter] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const t1 = setTimeout(() => setShowLogo(true), 2600);
-    const t2 = setTimeout(() => setShowEnter(true), 4200);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
+    const t = setTimeout(() => setShowEnter(true), 3200);
+    return () => clearTimeout(t);
   }, []);
 
   const handleEnter = () => {
     setIsExiting(true);
     setTimeout(() => navigate("/home"), 700);
   };
-
-  // Petal shape matching the JSV logo — a pointed teardrop leaf
-  const petalPath =
-    "M 0 12 C -34 -8 -34 -68 0 -96 C 34 -68 34 -8 0 12 Z";
 
   return (
     <AnimatePresence mode="wait">
@@ -55,108 +52,63 @@ const Splash = () => {
           />
 
           <div className="relative z-10 flex flex-col items-center px-8">
-            {/* Stage A: SVG bloom (visible until logo image takes over) */}
-            <AnimatePresence>
-              {!showLogo && (
-                <motion.div
-                  key="bloom"
-                  className="w-56 h-56 md:w-64 md:h-64"
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <svg
-                    viewBox="-120 -120 240 240"
-                    className="w-full h-full overflow-visible"
-                  >
-                    <defs>
-                      <linearGradient
-                        id="petalGold"
-                        x1="0"
-                        y1="-100"
-                        x2="0"
-                        y2="12"
-                        gradientUnits="userSpaceOnUse"
-                      >
-                        <stop offset="0%" stopColor="#e3b860" />
-                        <stop offset="55%" stopColor="#d4a23e" />
-                        <stop offset="100%" stopColor="#b88528" />
-                      </linearGradient>
-                    </defs>
-
-                    {/* Left petal — fans out from center after the center petal opens */}
-                    <motion.path
-                      d={petalPath}
-                      fill="url(#petalGold)"
-                      initial={{ scale: 0.4, rotate: 0, opacity: 0 }}
-                      animate={{ scale: 1, rotate: -42, opacity: 1 }}
-                      transition={{
-                        scale: { duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] },
-                        rotate: { duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 0.5, delay: 1.5 },
-                      }}
-                      style={{ transformOrigin: "0px 12px" }}
-                    />
-
-                    {/* Right petal — mirrored */}
-                    <motion.path
-                      d={petalPath}
-                      fill="url(#petalGold)"
-                      initial={{ scale: 0.4, rotate: 0, opacity: 0 }}
-                      animate={{ scale: 1, rotate: 42, opacity: 1 }}
-                      transition={{
-                        scale: { duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] },
-                        rotate: { duration: 1.0, delay: 1.5, ease: [0.16, 1, 0.3, 1] },
-                        opacity: { duration: 0.5, delay: 1.5 },
-                      }}
-                      style={{ transformOrigin: "0px 12px" }}
-                    />
-
-                    {/* Center petal — opens first, upright */}
-                    <motion.path
-                      d={petalPath}
-                      fill="url(#petalGold)"
-                      initial={{ scaleY: 0, scaleX: 0.5, opacity: 0 }}
-                      animate={{ scaleY: 1, scaleX: 1, opacity: 1 }}
-                      transition={{
-                        duration: 1.1,
-                        delay: 0.3,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                      style={{ transformOrigin: "0px 12px" }}
-                    />
-                  </svg>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Stage B: Full JSV logo (flower + wordmark) fades in once bloom completes */}
-            <AnimatePresence>
-              {showLogo && (
-                <motion.img
-                  key="logo"
-                  src={jsvLogo}
-                  alt="JSV International LLP"
-                  className="w-72 md:w-80 h-auto drop-shadow-[0_8px_30px_hsl(38_70%_40%/0.35)]"
-                  initial={{ opacity: 0, scale: 0.92, y: 8 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                />
-              )}
-            </AnimatePresence>
+            {/* The actual logo image — animated as one piece via clip-path so the
+                center petal appears first, then the side petals fan out, then
+                the wordmark reveals beneath. */}
+            <motion.div
+              className="relative w-72 md:w-96 lg:w-[28rem]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.img
+                src={jsvLogo}
+                alt="JSV International LLP"
+                className="w-full h-auto drop-shadow-[0_10px_40px_hsl(38_70%_35%/0.45)]"
+                initial={{
+                  clipPath: "inset(0% 46% 55% 46%)",
+                  scale: 0.55,
+                  y: 20,
+                }}
+                animate={{
+                  clipPath: [
+                    "inset(0% 46% 55% 46%)", // narrow vertical sliver — only center petal
+                    "inset(0% 8% 55% 8%)",   // horizontal bloom — side petals fan out
+                    "inset(0% 0% 0% 0%)",    // full wordmark revealed
+                  ],
+                  scale: [0.55, 0.85, 1],
+                  y: [20, 10, 0],
+                }}
+                transition={{
+                  duration: 2.8,
+                  times: [0, 0.55, 1],
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: 0.2,
+                }}
+              />
+              {/* Soft golden shimmer sweeping across the logo once revealed */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none mix-blend-overlay"
+                style={{
+                  background:
+                    "linear-gradient(110deg, transparent 35%, hsl(48 100% 85% / 0.7) 50%, transparent 65%)",
+                  backgroundSize: "200% 100%",
+                }}
+                initial={{ backgroundPosition: "200% 0%", opacity: 0 }}
+                animate={{ backgroundPosition: "-100% 0%", opacity: [0, 1, 0] }}
+                transition={{ duration: 1.6, delay: 2.6, ease: "easeOut" }}
+              />
+            </motion.div>
 
             {/* Tagline */}
-            <AnimatePresence>
-              {showLogo && (
-                <motion.p
-                  className="font-heading text-base md:text-xl text-[hsl(22_55%_18%)] italic tracking-wide mt-6 text-center max-w-md"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.7 }}
-                >
-                  From Mithila's Lotus Ponds — Refined for the World
-                </motion.p>
-              )}
-            </AnimatePresence>
+            <motion.p
+              className="font-heading text-base md:text-xl text-[hsl(22_55%_18%)] italic tracking-wide mt-8 text-center max-w-md"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 3.1 }}
+            >
+              From Mithila's Lotus Ponds — Refined for the World
+            </motion.p>
 
             {/* Enter CTA */}
             <AnimatePresence>
