@@ -1,21 +1,14 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, ShoppingBag, Heart, Sparkles, ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, Check, Sparkles, ArrowRight, Mail } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { getProductById, products } from "@/data/products";
-import { useCart } from "@/contexts/CartContext";
-import { useSound } from "@/contexts/SoundContext";
-import { toast } from "sonner";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const product = getProductById(id || "");
-  const { addToCart, setIsCartOpen } = useCart();
-  const { play } = useSound();
-  const [isAddingToCart, setIsAddingToCart] = useState(false);
 
   if (!product) {
     return (
@@ -60,7 +53,7 @@ const ProductDetail = () => {
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="relative"
             >
               <div className="aspect-square product-image rounded-[2.5rem] overflow-hidden shadow-luxury">
@@ -79,27 +72,29 @@ const ProductDetail = () => {
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col justify-center"
             >
               <div className="inline-flex items-center gap-2 luxury-badge mb-6 self-start">
                 <Sparkles className="w-3 h-3 text-gold" />
                 <span>{product.category}</span>
               </div>
-              
+
               <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl mb-6 font-medium">
                 {product.name}
               </h1>
               <div className="divider-gold mb-8" />
-              
+
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 {product.longDescription}
               </p>
 
-              <div className="flex items-baseline gap-4 mb-10">
-                <span className="font-heading text-5xl text-primary">{product.price}</span>
-                <span className="text-muted-foreground text-lg">/ {product.weight}</span>
-              </div>
+              <p className="text-lg text-foreground mb-2 font-medium">
+                {product.weight}
+              </p>
+              <p className="text-muted-foreground mb-10">
+                Pricing available on request — enquire for current rates.
+              </p>
 
               {/* Benefits Tags */}
               <div className="flex flex-wrap gap-3 mb-10">
@@ -115,43 +110,11 @@ const ProductDetail = () => {
 
               {/* CTAs */}
               <div className="flex gap-4">
-                <Button
-                  variant="luxury"
-                  size="lg"
-                  className="flex-1"
-                  disabled={isAddingToCart}
-                  onClick={async () => {
-                    setIsAddingToCart(true);
-                    play("add-to-cart");
-                    try {
-                      await addToCart({
-                        product_id: product.id,
-                        product_name: product.name,
-                        product_price: product.price,
-                        product_image: product.image,
-                        product_weight: product.weight,
-                      });
-                      toast.success("Added to cart!", {
-                        description: `${product.name} has been added to your cart.`,
-                        action: {
-                          label: "View Cart",
-                          onClick: () => setIsCartOpen(true),
-                        },
-                      });
-                    } catch (error) {
-                      toast.error("Failed to add to cart", {
-                        description: "Please try again.",
-                      });
-                    } finally {
-                      setIsAddingToCart(false);
-                    }
-                  }}
-                >
-                  <ShoppingBag className="w-5 h-5 mr-3" />
-                  {isAddingToCart ? "Adding..." : "Add to Cart"}
-                </Button>
-                <Button variant="outline" size="lg" className="rounded-2xl border-border">
-                  <Heart className="w-5 h-5" />
+                <Button variant="luxury" size="lg" className="flex-1" asChild>
+                  <Link to="/contact">
+                    <Mail className="w-5 h-5 mr-3" />
+                    Enquire Now
+                  </Link>
                 </Button>
               </div>
             </motion.div>
@@ -168,7 +131,7 @@ const ProductDetail = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <h2 className="font-heading text-3xl mb-8 font-medium">Premium Ingredients</h2>
               <ul className="space-y-4">
@@ -188,7 +151,7 @@ const ProductDetail = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
               <h2 className="font-heading text-3xl mb-8 font-medium">Nutritional Information</h2>
               <p className="text-sm text-muted-foreground mb-6 font-medium tracking-wide">Per 30g serving</p>
@@ -213,7 +176,7 @@ const ProductDetail = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="text-center mb-16"
             >
               <p className="gold-accent tracking-[0.4em] uppercase text-sm mb-4 font-medium">
@@ -229,7 +192,7 @@ const ProductDetail = () => {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Link to={`/products/${relProduct.id}`} className="block group">
                     <div className="card-luxury p-8">
@@ -242,7 +205,7 @@ const ProductDetail = () => {
                       </div>
                       <h3 className="font-heading text-xl mb-3 font-medium">{relProduct.name}</h3>
                       <div className="flex items-center justify-between">
-                        <p className="text-primary font-heading text-lg">{relProduct.price}</p>
+                        <p className="text-primary font-heading text-lg">{relProduct.weight}</p>
                         <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-gold group-hover:translate-x-1 transition-all duration-300" />
                       </div>
                     </div>

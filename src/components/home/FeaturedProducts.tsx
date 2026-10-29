@@ -2,34 +2,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getFeaturedProducts } from "@/data/products";
-import { useCart } from "@/contexts/CartContext";
-import { useSound } from "@/contexts/SoundContext";
-import { ArrowRight, ShoppingBag } from "lucide-react";
-import { toast } from "sonner";
+import { ArrowRight } from "lucide-react";
 
 const FeaturedProducts = () => {
   const featuredProducts = getFeaturedProducts();
-  const { addToCart, setIsCartOpen } = useCart();
-  const { play } = useSound();
-
-  const handleAdd = async (product: ReturnType<typeof getFeaturedProducts>[number]) => {
-    play("add-to-cart");
-    try {
-      await addToCart({
-        product_id: product.id,
-        product_name: product.name,
-        product_price: product.price,
-        product_image: product.image,
-        product_weight: product.weight,
-      });
-      toast.success("Added to cart!", {
-        description: `${product.name} has been added to your cart.`,
-        action: { label: "View Cart", onClick: () => setIsCartOpen(true) },
-      });
-    } catch {
-      toast.error("Failed to add to cart");
-    }
-  };
 
   return (
     <section className="section-padding bg-background lv-pattern">
@@ -38,7 +14,7 @@ const FeaturedProducts = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-20"
         >
           <p className="text-accent tracking-[0.4em] uppercase text-sm mb-4 font-medium">
@@ -57,11 +33,11 @@ const FeaturedProducts = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.12 }}
+              transition={{ duration: 0.7, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="group"
             >
               <div className="card-luxury p-8 h-full flex flex-col">
-                <Link to={`/products/${product.id}`} onClick={() => play("click")}>
+                <Link to={`/products/${product.id}`}>
                   <div className="relative aspect-square mb-6 product-image rounded-3xl overflow-hidden">
                     <img
                       src={product.image}
@@ -75,13 +51,11 @@ const FeaturedProducts = () => {
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2 flex-1">
                     {product.description}
                   </p>
-                  <p className="text-primary font-heading text-2xl mb-5">
-                    {product.price}
-                    <span className="text-xs text-muted-foreground ml-1">/ {product.weight}</span>
+                  <p className="text-sm text-muted-foreground mb-5">
+                    {product.weight} · Enquire for pricing
                   </p>
-                  <Button variant="luxury" size="sm" onClick={() => handleAdd(product)}>
-                    <ShoppingBag className="w-4 h-4 mr-2" />
-                    Add to Cart
+                  <Button variant="luxury" size="sm" asChild>
+                    <Link to="/contact">Enquire Now</Link>
                   </Button>
                 </div>
               </div>
@@ -93,10 +67,10 @@ const FeaturedProducts = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <Button variant="luxury" size="lg" asChild onClick={() => play("click")}>
+          <Button variant="luxury" size="lg" asChild>
             <Link to="/products">
               <span>View Full Collection</span>
               <ArrowRight className="w-4 h-4 ml-2" />
