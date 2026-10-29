@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      enquiries: {
+        Row: {
+          company: string | null
+          country: string | null
+          created_at: string
+          email: string
+          form_type: string
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          quantity: string | null
+          subject: string | null
+        }
+        Insert: {
+          company?: string | null
+          country?: string | null
+          created_at?: string
+          email: string
+          form_type?: string
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          quantity?: string | null
+          subject?: string | null
+        }
+        Update: {
+          company?: string | null
+          country?: string | null
+          created_at?: string
+          email?: string
+          form_type?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          quantity?: string | null
+          subject?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
