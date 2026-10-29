@@ -3,6 +3,7 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { submitEnquiry, isValidEmail } from "@/lib/enquiries";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -12,11 +13,30 @@ const Contact = () => {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you for your message! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    if (!isValidEmail(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await submitEnquiry({
+        form_type: "contact",
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      });
+      toast.success("Thank you for your message! We'll get back to you soon.");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      toast.error("Could not send your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -27,7 +47,7 @@ const Contact = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-center max-w-3xl mx-auto"
           >
             <p className="text-gold tracking-[0.3em] uppercase text-sm mb-4">
@@ -54,7 +74,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-1"
             >
               <h2 className="font-heading text-2xl mb-8">Contact Information</h2>
@@ -83,10 +103,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-medium mb-1">Email</h3>
                     <a
-                      href="mailto:info@maxana.in"
+                      href="mailto:jsvintai@gmail.com"
                       className="text-muted-foreground text-sm hover:text-primary transition-colors"
                     >
-                      info@maxana.in
+                      jsvintai@gmail.com
                     </a>
                   </div>
                 </div>
@@ -125,7 +145,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-2"
             >
               <div className="bg-muted p-8 rounded-lg">
@@ -136,6 +156,7 @@ const Contact = () => {
                       type="text"
                       placeholder="Your Name *"
                       required
+                      maxLength={120}
                       value={formData.name}
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
@@ -146,6 +167,7 @@ const Contact = () => {
                       type="email"
                       placeholder="Email Address *"
                       required
+                      maxLength={255}
                       value={formData.email}
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
@@ -157,6 +179,7 @@ const Contact = () => {
                     type="text"
                     placeholder="Subject *"
                     required
+                    maxLength={200}
                     value={formData.subject}
                     onChange={(e) =>
                       setFormData({ ...formData, subject: e.target.value })
@@ -167,14 +190,15 @@ const Contact = () => {
                     placeholder="Your Message *"
                     required
                     rows={6}
+                    maxLength={5000}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
                     }
                     className="w-full px-4 py-3 bg-background border border-border focus:border-primary focus:outline-none rounded-sm resize-none"
                   />
-                  <Button variant="luxury" size="lg" type="submit">
-                    Send Message
+                  <Button variant="luxury" size="lg" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </div>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Globe, Package, Shield, Award, CheckCircle } from "lucide-react";
+import { submitEnquiry, isValidEmail } from "@/lib/enquiries";
 import { toast } from "sonner";
 
 const features = [
@@ -38,19 +39,41 @@ const Export = () => {
     quantity: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! Our export team will contact you within 24 hours.");
-    setFormData({
-      name: "",
-      company: "",
-      email: "",
-      phone: "",
-      country: "",
-      quantity: "",
-      message: "",
-    });
+    if (!isValidEmail(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await submitEnquiry({
+        form_type: "export",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        country: formData.country,
+        quantity: formData.quantity,
+        message: formData.message,
+      });
+      toast.success("Thank you! Our export team will contact you within 24 hours.");
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        phone: "",
+        country: "",
+        quantity: "",
+        message: "",
+      });
+    } catch {
+      toast.error("Could not submit your enquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -61,7 +84,7 @@ const Export = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-center max-w-3xl mx-auto"
           >
             <p className="text-gold tracking-[0.3em] uppercase text-sm mb-4">
@@ -89,7 +112,7 @@ const Export = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="text-center p-6 bg-muted rounded-lg"
               >
                 <feature.icon size={36} className="text-primary mx-auto mb-4" />
@@ -106,7 +129,7 @@ const Export = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="grid lg:grid-cols-2 gap-16 items-center"
           >
             <div>
@@ -146,6 +169,7 @@ const Export = () => {
                     type="text"
                     placeholder="Your Name *"
                     required
+                    maxLength={120}
                     value={formData.name}
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
@@ -156,6 +180,7 @@ const Export = () => {
                     type="text"
                     placeholder="Company Name *"
                     required
+                    maxLength={200}
                     value={formData.company}
                     onChange={(e) =>
                       setFormData({ ...formData, company: e.target.value })
@@ -168,6 +193,7 @@ const Export = () => {
                     type="email"
                     placeholder="Email Address *"
                     required
+                    maxLength={255}
                     value={formData.email}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
@@ -177,6 +203,7 @@ const Export = () => {
                   <input
                     type="tel"
                     placeholder="Phone Number"
+                    maxLength={30}
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({ ...formData, phone: e.target.value })
@@ -189,6 +216,7 @@ const Export = () => {
                     type="text"
                     placeholder="Country *"
                     required
+                    maxLength={100}
                     value={formData.country}
                     onChange={(e) =>
                       setFormData({ ...formData, country: e.target.value })
@@ -198,6 +226,7 @@ const Export = () => {
                   <input
                     type="text"
                     placeholder="Estimated Quantity"
+                    maxLength={100}
                     value={formData.quantity}
                     onChange={(e) =>
                       setFormData({ ...formData, quantity: e.target.value })
@@ -208,14 +237,15 @@ const Export = () => {
                 <textarea
                   placeholder="Tell us about your requirements..."
                   rows={4}
+                  maxLength={5000}
                   value={formData.message}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
                   className="w-full px-4 py-3 bg-background border border-border focus:border-primary focus:outline-none rounded-sm resize-none"
                 />
-                <Button variant="luxury" size="lg" className="w-full" type="submit">
-                  Submit Enquiry
+                <Button variant="luxury" size="lg" className="w-full" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                 </Button>
               </form>
             </div>

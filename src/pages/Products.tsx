@@ -4,50 +4,47 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { products, bulkGrades } from "@/data/products";
-import { useCart } from "@/contexts/CartContext";
-import { useSound } from "@/contexts/SoundContext";
-import { ArrowRight, Sparkles, ShoppingBag, MessageCircle, AlertCircle } from "lucide-react";
+import { submitEnquiry, isValidEmail } from "@/lib/enquiries";
+import { ArrowRight, Sparkles, MessageCircle, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
 const WHATSAPP_NUMBER = "919608429953";
 
 const Products = () => {
-  const { addToCart, setIsCartOpen } = useCart();
-  const { play } = useSound();
   const [enquiry, setEnquiry] = useState({
     name: "",
+    email: "",
     phone: "",
     quantity: "",
     grade: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAddToCart = async (id: string) => {
-    const product = products.find((p) => p.id === id);
-    if (!product) return;
-    play("add-to-cart");
-    try {
-      await addToCart({
-        product_id: product.id,
-        product_name: product.name,
-        product_price: product.price,
-        product_image: product.image,
-        product_weight: product.weight,
-      });
-      toast.success("Added to cart!", {
-        description: `${product.name} has been added to your cart.`,
-        action: { label: "View Cart", onClick: () => setIsCartOpen(true) },
-      });
-    } catch {
-      toast.error("Failed to add to cart");
-    }
-  };
-
-  const handleEnquirySubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    play("success");
-    toast.success("Enquiry received! Our team will reach out shortly.");
-    setEnquiry({ name: "", phone: "", quantity: "", grade: "", message: "" });
+    if (!isValidEmail(enquiry.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      await submitEnquiry({
+        form_type: "bulk",
+        name: enquiry.name,
+        email: enquiry.email,
+        phone: enquiry.phone,
+        quantity: enquiry.quantity,
+        subject: `Bulk enquiry — ${enquiry.grade}`,
+        message: `Grade: ${enquiry.grade}${enquiry.message ? `\n\n${enquiry.message}` : ""}`,
+      });
+      toast.success("Enquiry received! Our team will reach out shortly.");
+      setEnquiry({ name: "", email: "", phone: "", quantity: "", grade: "", message: "" });
+    } catch {
+      toast.error("Could not submit your enquiry. Please try again or WhatsApp us.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -62,7 +59,7 @@ const Products = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="text-center max-w-3xl mx-auto"
           >
             <div className="inline-flex items-center gap-2 luxury-badge mb-6">
@@ -74,7 +71,7 @@ const Products = () => {
             </h1>
             <div className="divider-gold mx-auto mb-8" />
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Hand-picked raw makhana from Mithila — available as ready-to-buy
+              Hand-picked raw makhana from Mithila — available as premium
               250g retail packs and as graded loose bulk for dealers and exporters.
             </p>
             <div className="flex justify-center gap-3 mt-8">
@@ -96,7 +93,7 @@ const Products = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="text-center mb-16"
           >
             <p className="text-accent tracking-[0.3em] uppercase text-sm mb-3 font-medium">Retail · 250g Packs</p>
@@ -111,11 +108,11 @@ const Products = () => {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 className="group"
               >
                 <div className="card-luxury overflow-hidden h-full flex flex-col">
-                  <Link to={`/products/${product.id}`} onClick={() => play("click")}>
+                  <Link to={`/products/${product.id}`}>
                     <div className="relative aspect-square product-image rounded-t-3xl">
                       <img
                         src={product.image}
@@ -130,21 +127,19 @@ const Products = () => {
                     <p className="text-sm text-muted-foreground mb-5 leading-relaxed flex-1">
                       {product.description}
                     </p>
-                    <div className="flex items-baseline gap-2 mb-5">
-                      <span className="text-3xl font-heading text-primary">{product.price}</span>
-                      <span className="text-xs text-muted-foreground">/ {product.weight}</span>
-                    </div>
+                    <p className="text-sm text-muted-foreground mb-5">
+                      {product.weight} · Enquire for pricing
+                    </p>
                     <div className="flex gap-2">
                       <Button
                         variant="luxury"
                         size="sm"
                         className="flex-1"
-                        onClick={() => handleAddToCart(product.id)}
+                        asChild
                       >
-                        <ShoppingBag className="w-4 h-4 mr-2" />
-                        Add to Cart
+                        <Link to="/contact">Enquire Now</Link>
                       </Button>
-                      <Button variant="outline" size="sm" asChild onClick={() => play("click")}>
+                      <Button variant="outline" size="sm" asChild>
                         <Link to={`/products/${product.id}`}>
                           <ArrowRight className="w-4 h-4" />
                         </Link>
@@ -165,7 +160,7 @@ const Products = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="text-center mb-12"
           >
             <p className="text-accent tracking-[0.3em] uppercase text-sm mb-3 font-medium">Bulk · Loose Supply</p>
@@ -182,7 +177,7 @@ const Products = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="bg-accent/15 border border-accent/40 rounded-2xl p-5 mb-10 flex items-start gap-3"
           >
             <AlertCircle className="w-5 h-5 text-accent mt-0.5 shrink-0" />
@@ -196,7 +191,7 @@ const Products = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="card-luxury overflow-hidden mb-8"
           >
             <div className="overflow-x-auto">
@@ -238,7 +233,7 @@ const Products = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="bg-foreground text-background rounded-3xl p-8 flex flex-col justify-center"
             >
               <h3 className="font-heading text-3xl mb-4">Get Live Pricing</h3>
@@ -249,7 +244,6 @@ const Products = () => {
                 variant="gold"
                 size="lg"
                 asChild
-                onClick={() => play("click")}
               >
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5 mr-2" />
@@ -267,7 +261,7 @@ const Products = () => {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="bg-card border border-border rounded-3xl p-8"
             >
               <h3 className="font-heading text-2xl mb-5">Or fill the enquiry form</h3>
@@ -275,6 +269,11 @@ const Products = () => {
                 <input
                   type="text" placeholder="Your Name *" required
                   value={enquiry.name} onChange={(e) => setEnquiry({ ...enquiry, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-background border border-border focus:border-primary focus:outline-none rounded-sm"
+                />
+                <input
+                  type="email" placeholder="Email Address *" required
+                  value={enquiry.email} onChange={(e) => setEnquiry({ ...enquiry, email: e.target.value })}
                   className="w-full px-4 py-3 bg-background border border-border focus:border-primary focus:outline-none rounded-sm"
                 />
                 <input
@@ -304,8 +303,8 @@ const Products = () => {
                   value={enquiry.message} onChange={(e) => setEnquiry({ ...enquiry, message: e.target.value })}
                   className="w-full px-4 py-3 bg-background border border-border focus:border-primary focus:outline-none rounded-sm resize-none"
                 />
-                <Button variant="luxury" size="lg" type="submit" className="w-full">
-                  Submit Enquiry
+                <Button variant="luxury" size="lg" type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Submitting..." : "Submit Enquiry"}
                 </Button>
               </form>
             </motion.div>
